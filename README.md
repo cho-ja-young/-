@@ -8,7 +8,7 @@
 
 ## 개발 스택
 
-- python
+- html
 - css
 - javascript
 
