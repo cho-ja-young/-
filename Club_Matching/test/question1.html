@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동아리 매칭 TEST</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        input[type=radio]{
+            display: none;
+            margin:10px;
+        }
+        input[type=radio]+label{
+            display:inline-block;
+            margin:2px;
+            padding: 8px 19px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            font-size: 13px !important;
+            width: 70%;
+            text-align:center;
+        }
+        input[type=radio]:checked+label{
+            background-color: #0c6ca4;
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="py-4 text-center">
+            <a href="index.html"><h3><b>동아리 매칭 TEST</h1></a>
+        </div>
+    </header>
+    <section>
+        <div class="py-4 text-center">
+            <article>
+                <div class="container">
+                    <form class="form" action="question2.html">
+                        <h4>문제1</h2>
+                        <p>첫 등교날, OT가 끝난 후 나는<br></p>
+                        <div>
+                            <input type="radio" name="EI" id="1-1" class="I_btn">
+                            <label for="1-1">바로 집으로 가 나만의 시간을 보낸다</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="EI" id="1-2" class="E_btn">
+                            <label for="1-2">새로 사귄 친구들과 함께 학교 투어를 한다</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary m-1">다음</button>
+                    </form>
+                    <br>
+                </div>
+            </article>
+        </div>
+    </section>
+    <footer>
+    </footer>
+</body>
+</html>

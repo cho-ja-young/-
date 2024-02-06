@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동아리 매칭 TEST</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        input[type=radio]{
+            display: none;
+            margin:10px;
+        }
+        input[type=radio]+label{
+            display:inline-block;
+            margin:2px;
+            padding: 8px 19px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            font-size: 13px !important;
+            width: 70%;
+            text-align:center;
+        }
+        input[type=radio]:checked+label{
+            background-color: #0c6ca4;
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="py-4 text-center">
+            <a href="index.html"><h3><b>동아리 매칭 TEST</h1></a>
+        </div>
+    </header>
+    <section>
+        <div class="py-4 text-center">
+            <article>
+                <div class="container">
+                    <form class="form" action="result.html">
+                        <h4>문제12</h2>
+                        <p>친구들과 밥을 먹을 때, 나의 선택은?</p>
+                        <div>
+                            <input type="radio" name="JP" id="12-1" class="J_btn">
+                            <label for="12-1">가던 맛집이 제일 편하고 익숙하다.</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="JP" id="12-2" class="J_btn">
+                            <label for="12-2">네이버지도를 켜고 미리 표시해놓은 맛집 리스트를 친구들에게 보여준다!</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="JP" id="12-3" class="P_btn">
+                            <label for="12-3">가던 곳을 자주가는 것보다 매번 새로운 곳을 추구한다.</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="JP" id="12-4" class="P_btn">
+                            <label for="12-4">(친구들과 길을 걷다가)여기 가게 분위기 좋다~ 여기서 밥 먹자!</label>
+                        </div>
+                    </form>
+                    <br>
+                </div>
+            </article>
+        </div>
+    </section>
+    <footer>
+        <div class="py-4 text-center">
+            <button class="btn btn-primary m-1" onclick="result()">결과보기</button>
+        </div>
+    </footer>
+    <script>
+        function result(){
+            let E_count = 0;
+            let I_count = 0;
+            let EI=''
+
+            let elements_EI = document.getElementsByClassName('E_btn');
+            for (let i = 0; i < elements_EI.length; i++) {
+                if(elements_EI[i].checked){
+                    E_count++;
+                }
+                
+            }
+            elements_EI = document.getElementsByClassName('I_btn');
+            for (let i = 0; i < elements_EI.length; i++) {
+                if(elements_EI[i].checked){
+                    I_count++;
+                }
+            }
+            if(E_count>I_count){
+                EI="E";
+            }else{
+                EI="I";
+            }
+            let S_count = 0;
+            let N_count = 0;
+            let SN=''
+
+            let elements_SN = document.getElementsByClassName('S_btn');
+            for (let i = 0; i < elements_SN.length; i++) {
+                if(elements_SN[i].checked){
+                    S_count++;
+                }
+                
+            }
+            elements_SN = document.getElementsByClassName('N_btn');
+            for (let i = 0; i < elements_SN.length; i++) {
+                if(elements_SN[i].checked){
+                    N_count++;
+                }
+            }
+            if(S_count>N_count){
+                SN="S";
+            }else{
+                SN="N";
+            }
+ 
+            let T_count = 0;
+            let F_count = 0;
+            let TF=''
+
+            let elements_TF = document.getElementsByClassName('T_btn');
+            for (let i = 0; i < elements_TF.length; i++) {
+                if(elements_TF[i].checked){
+                    T_count++;
+                }
+                
+            }
+            elements_TF = document.getElementsByClassName('F_btn');
+            for (let i = 0; i < elements_TF.length; i++) {
+                if(elements_TF[i].checked){
+                    F_count++;
+                }
+                
+            }
+            if(T_count>N_count){
+                TF="T";
+            }else{
+                TF="F";
+            }
+
+            let J_count = 0;
+            let P_count = 0;
+            let JP=''
+
+            let elements_JP = document.getElementsByClassName('J_btn');
+            for (let i = 0; i < elements_JP.length; i++) {
+                if(elements_JP[i].checked){
+                    J_count++;
+                }
+                
+            }
+            elements_JP = document.getElementsByClassName('P_btn');
+            for (let i = 0; i < elements_JP.length; i++) {
+                if(elements_JP[i].checked){
+                    P_count++;
+                }
+                
+            }
+            if(J_count>P_count){
+                JP="J";
+            }else{
+                JP="P";
+            }
+
+            if (E_count+I_count+N_count+S_count+T_count+F_count+J_count+P_count != 12){
+                alert('모든 문제에 답해주세요');
+                return;
+            }
+        
+            console.log(E_count,I_count,N_count,S_count,T_count,F_count,J_count,P_count);
+            result=EI+SN+TF+JP;
+            if(result == "ENTJ"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ENTP"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ENFJ"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ENFP"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ESTJ"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ESTP"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ESFJ"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ESFP"){
+                location.href="result/result_beverage.html";
+            }else if(result == "INTJ"){
+                location.href="result/result_beverage.html";
+            }else if(result == "INTP"){
+                location.href="result/result_beverage.html";
+            }else if(result == "INFJ"){
+                location.href="result/result_beverage.html";
+            }else if(result == "INFP"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ISTJ"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ISTP"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ISFJ"){
+                location.href="result/result_beverage.html";
+            }else if(result == "ISFP"){
+                location.href="result/result_beverage.html";
+            }
+
+
+            
+        }
+
+          
+        
+    </script>
+</body>
+</html>
