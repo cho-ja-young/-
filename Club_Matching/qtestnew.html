@@ -13,7 +13,6 @@
             margin: 0 auto; /* 화면의 중앙에 위치하도록 설정합니다. */
             border-radius: 10px; /* 모든 모서리에 동일한 반지름을 적용합니다. */
         }
-
         #progress {
             width: 10%;
             height: 30px;
@@ -23,37 +22,20 @@
             color: white;
             border-radius: 10px; /* 모든 모서리에 동일한 반지름을 적용합니다. */
         }
-
-        input[type=radio]{
-            display: none;
-            margin:10px;
-        }
-        input[type=radio]+label{
-            display:inline-block;
-            margin: 8px;
-            padding: 40px 20px;
-            background-color: #f5f5f5;
-            border: 1.5px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px !important;
-            width: 35%;
-            text-align:center;
-        }
-        input[type=radio]:checked+label{
-            background-color: #0c6ca4;
-            color:#fff;
-        }
-        .btn-primary {
-        background-color: #0c6ca4 !important;
+        .btn.btn-primary {
+            background-color: #0c6ca4 !important;
+            font-size: 30px;
+            padding: 15px 30px;
+            width: 15%;
         }
         a {
-        text-decoration-color: #0c6ca4;
-        text-decoration: none;
+            text-decoration-color: #0c6ca4;
+            text-decoration: none;
         }
-        h5 {
-            font-weight: bold; /* 볼드체 적용 */
+        #title {
+            font-weight: bold;
         }
-        .btn.btn-primary {
+        .btn {
             display:inline-block;
             margin: 8px;
             padding: 40px 20px;
@@ -61,13 +43,16 @@
             border: 1.5px solid #ccc;
             border-radius: 8px;
             font-size: 14px !important;
-            width: 35%;
+            font-weight: bold;
+            width: 27%;
             text-align:center;
+            transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
         }
-        article{
-            display: flex;
-            flex-direction: column;
-        }       
+        /* 마우스를 올렸을 때의 버튼 스타일 */
+        .btn:hover {
+            background-color: #0c6ca4; /* 마우스를 올렸을 때 배경색 변경 */
+            color: white;
+        }      
         .question {
             display: none;
         }     
@@ -75,32 +60,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="startquestion text-center">
+    <div class="start text-center">
+        <br><h1><b>CLUB Matching TEST</b></h1><br>
+        이것도 하고 싶고 저것도 하고 싶은 당신 !<br>
+        과연 나에게 잘 어울리는 동아리는 무엇일까요 ?<br>
+        <img src="image/us.jpeg" style="width: 35%; text-align: center;"><br>
+        <button class="btn btn-primary" onclick="start()" style="background-color: #0c6ca4; border-color: #0c6ca4;">START</a></button>
+    </div>
+    <div class="question text-center">
         <header>
             <br>
-            <a href="./index.html"><h2><b>CLUB Matching TEST</h2></a><br>
+            <a href="qtestnew.html"><h2><b>CLUB Matching TEST</h2></a><br><br>
             <div id="progressBar">
                 <div id="progress"></div>
-            </div><br><br>
+            </div><br><br><br>
         </header>
-        <h5 id="title">설레는 동아리 선택, 준비되셨나요?<br><br></h5><br>
-        <button type="button" class="btn btn-primary m-1" onclick="startQuestion();">준비되었습니다!</button>
-        <br><br>
-        <button type="button" class="btn btn-primary m-1" onclick="startQuestion();">빨리 시작해주세요.</button>
-        <br>
-    </div>
-    <div class="question">
-        <a href="./index.html"><h2><b>CLUB Matching TEST</h2></a><br>
-        <div id="progressBar">
-            <div id="progress"></div>
-        </div><br><br>
-        <h2 id="title">1번 문제</h2>
+        <h5 id="title">1번 문제</h5><br><br>
         <!--1번-->
         <input id="type" type="hidden" value="EI">
         <!--2번-->
-        <button id="A" type="button">대답 E</button>
-        <button id="B" type="button">대답 I</button>
-     </div>
+        <button id="A" type="button" class="btn">대답 E</button><br>
+        <button id="B" type="button" class="btn">대답 I</button>
+    </div>
         <!--3번-->
         <input type="hidden" id="EI" value="0">
         <input type="hidden" id="SN" value="0">
@@ -183,8 +164,8 @@
                 }
             }
     
-            function startQuestion() {
-                $(".startquestion").hide();
+            function start() {
+                $(".start").hide();
                 $(".question").show();
                 nextQuestion();
             }
