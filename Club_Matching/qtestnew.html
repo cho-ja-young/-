@@ -75,18 +75,30 @@
                 <div id="progress"></div>
             </div><br><br><br>
         </header>
-        <h5 id="title">1번 문제</h5><br><br>
+        <h5 id="title">문제</h5><br><br>
         <!--1번-->
         <input id="type" type="hidden" value="EI">
         <!--2번-->
-        <button id="A" type="button" class="btn">대답 E</button><br>
-        <button id="B" type="button" class="btn">대답 I</button>
+        <button id="A" type="button" class="btn">대답</button><br>
+        <button id="B" type="button" class="btn">대답</button><br>
+        <button id="C" type="button" class="btn">대답</button><br>
+        <button id="D" type="button" class="btn">대답</button><br>
+        <button id="E" type="button" class="btn">대답</button><br>
+        <button id="F" type="button" class="btn">대답</button><br><br><br><br>
     </div>
         <!--3번-->
-        <input type="hidden" id="EI" value="0">
-        <input type="hidden" id="SN" value="0">
-        <input type="hidden" id="TF" value="0">
-        <input type="hidden" id="JP" value="0">
+        <input type="hidden" id="beverage" value="0">
+        <input type="hidden" id="computer" value="0">
+        <input type="hidden" id="culture" value="0">
+        <input type="hidden" id="dance" value="0">
+        <input type="hidden" id="entertainment" value="0">
+        <input type="hidden" id="instrument" value="0">
+        <input type="hidden" id="language" value="0">
+        <input type="hidden" id="marketing" value="0">
+        <input type="hidden" id="pe" value="0">
+        <input type="hidden" id="religion" value="0">
+        <input type="hidden" id="unusual" value="0">
+        <input type="hidden" id="volunteer" value="0">
         <script>
             let progress = 0;
             var num = 1; // 현재 문제 번호
@@ -94,73 +106,153 @@
             var q = {
                 1: {
                     "title": "첫 등교날, OT가 끝난 후 나는", 
-                    "type": "JP", 
-                    "A": "바로 집으로 가 나만의 시간을 보낸다", 
-                    "B": "새로 사귄 친구들과 함께 학교 투어를 한다"
+                    "A": {
+                        "content": "바로 집으로 가 나만의 시간을 보낸다",
+                        "club": ["beverage", "culture", "language", "computer", "religion"]
+                    }, 
+                    "B": {
+                        "content": "새로 사귄 친구들과 함께 학교 투어를 한다",
+                        "club": ["entertainment", "volunteer", "unusual", "instrument", "dance", "marketing", "pe"]
+                    }
                 },
                 2: {
                     "title": "갑작스러운 휴강으로 공강시간이 생겼을 때 나는", 
-                    "type": "JP", 
-                    "A": "건강 증진을 위해 운동을 하러 간다", 
-                    "B": "학문 증진을 위해 독서나 공부를 하러 간다",
-                    "C": "취미 개발을 위해 다도를 하러 간다"
+                    "A": {
+                        "content": "건강 증진을 위해 운동을 하러 간다",
+                        "club": ["pe", "dance"]
+                    },
+                    "B": {
+                        "content": "학문 증진을 위해 독서나 공부를 하러 간다",
+                        "club": ["language", "computer", "unusual"]
+                    },
+                    "C": {
+                        "content": "취미 개발을 위해 다도를 하러 간다",
+                        "club": ["culture", "beverage"]
+                    }
                 },
                 3: {
                     "title": "나는 진로를", 
-                    "type": "EI", 
-                    "A": "인문 (어문) 계열로 생각 중이다", 
-                    "B": "사회과학계열로 생각 중이다",
-                    "C": "경영경제계열로 생각 중이다", 
-                    "D": "공학계열로 생각 중이다",
-                    "E": "IT 계열로 생각 중이다",
-                    "F": "예체능 계열로 생각 중이다"
+                    "A": {
+                        "content": "인문 (어문) 계열로 생각 중이다",
+                        "club": ["language"]
+                    },
+                    "B": {
+                        "content": "사회과학계열로 생각 중이다",
+                        "club": ["entertainment", "culture"]
+                    },
+                    "C": {
+                        "content": "경영경제계열로 생각 중이다",
+                        "club": ["marketing"]
+                    },
+                    "D": {
+                        "content": "공학계열로 생각 중이다",
+                        "club": ["unusual"]
+                    },
+                    "E": {
+                        "content": "IT 계열로 생각 중이다",
+                        "club": ["computer"]
+                    },
+                    "F": {
+                        "content": "예체능 계열로 생각 중이다",
+                        "club": ["dance", "instrument"]
+                    }
                 },
                 4: {
                     "title": "나는 동아리를", 
-                    "type": "SN", 
-                    "A": "새로운 사람을 만나기 위해 가입한다", 
-                    "B": "내가 배우고 싶은 것 또는<br>해보고 싶은 것을 경험하기 위해 가입한다"
+                    "A": {
+                        "content": "새로운 사람을 만나기 위해 가입한다",
+                        "club": ["volunteer", "entertainment", "culture", "pe"]
+                    },
+                    "B": {
+                        "content": "내가 배우고 싶은 것 또는 해보고 싶은 것을 경험하기 위해 가입한다",
+                        "club": ["language", "computer", "marketing", "unusual"]
+                    }
                 },
                 5: {
                     "title": "나는 종교가", 
-                    "type": "EI", 
-                    "A": "있다", 
-                    "B": "없다"
+                    "A": {
+                        "content": "있다",
+                        "club": ["religion"]
+                    },
+                    "B": {
+                        "content": "없다",
+                        "club": ["beverage", "culture", "volunteer"]
+                    }
                 },
                 6: {
                     "title": "둘 중에 더 좋은 것은?", 
-                    "type": "EI", 
-                    "A": "춤추기", 
-                    "B": "악기연주"
+                    "A": {
+                        "content": "춤추기",
+                        "club": ["dance"]
+                    },
+                    "B": {
+                        "content": "악기연주",
+                        "club": ["instrument"]
+                    }
                 },
                 7: {
                     "title": "나는 봉사활동을 할 때", 
-                    "type": "TF", 
-                    "A": "여러 사람과 함께 하는 것이 마음 편하다", 
-                    "B": "나 혼자 하는 것이 마음 편하다"
+                    "A": {
+                        "content": "여러 사람과 함께 하는 것이 마음 편하다",
+                        "club": ["volunteer"]
+                    },
+                    "B": {
+                        "content": "나 혼자 하는 것이 마음 편하다",
+                        "club": ["religion"]
+                    }
                 },
                 8: {
                     "title": "나는 여가 시간에", 
-                    "type": "TF", 
-                    "A": "주로 게임을 한다", 
-                    "B": "주로 책을 읽는다",
-                    "C": "주로 친구들과 통화한다", 
-                    "D": "주로 카페를 찾아간다"
+                    "A": {
+                        "content": "주로 게임을 한다",
+                        "club": ["entertainment"]
+                    },
+                    "B": {
+                        "content": "주로 책을 읽는다",
+                        "club": ["language", "computer", "unusual"]
+                    },
+                    "C": {
+                        "content": "주로 친구들과 통화한다",
+                        "club": ["marketing", "culture"]
+                    },
+                    "D": {
+                        "content": "주로 카페를 찾아간다",
+                        "club": ["beverage"]
+                    }
                 },
                 9: {
                     "title": "새로운 동아리에 가입한 나, 원하는 적응 방식은?", 
-                    "type": "SN", 
-                    "A": "일단 같이 활동하면서 배우기", 
-                    "B": "차근차근 알려준 뒤 실제 활동에 투입"
+                    "A": {
+                        "content": "일단 같이 활동하면서 배우기",
+                        "club": ["entertainment", "volunteer", "instrument", "dance", "marketing", "pe"]
+                    },
+                    "B": {
+                        "content": "차근차근 알려준 뒤 실제 활동에 투입",
+                        "club": ["beverage", "culture", "language", "computer", "unusual", "religion"]
+                    }
                 },
                 10: {
                     "title": "현재 내가 가장 필요하다고 느끼는 것은?", 
-                    "type": "TF", 
-                    "A": "체력 증진", 
-                    "B": "자격증 취득",
-                    "C": "취미 활동",
-                    "D": "진로와 관련된 스펙",
-                    "E": "무대 경험"
+                    "A": {
+                        "content": "체력 증진",
+                        "club": ["pe"]
+                    },
+                    "B": {
+                        "content": "자격증 취득",
+                        "club": ["language", "computer"]
+                    },
+                    "C": {
+                        "content": "취미 활동",
+                        "club": ["entertainment", "beverage", "culture", "volunteer", "religion"]
+                    },
+                    "D": {
+                        "content": "진로와 관련된 스펙",
+                        "club": ["marketing", "unusual"]
+                    },
+                    "E": {
+                        "content": "무대 경험",
+                        "club": ["instrument", "dance"]
+                    }
                 }
             }
     
@@ -171,31 +263,96 @@
             }
     
             $("#A").click(function () {
-                var type = $("#type").val();
-                var preValue = $("#" + type).val();
-                $("#" + type).val(parseInt(preValue) + 1);
-                nextQuestion();
+                // A 버튼을 클릭했을 때 A의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                var clubs = q[num]["A"]["club"];
+                increaseClubValues(clubs);
+                nextQuestion(); // 다음 질문으로 이동합니다.
             });
+
             $("#B").click(function () {
-                nextQuestion();
+                // B 버튼을 클릭했을 때 B의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                var clubs = q[num]["B"]["club"];
+                increaseClubValues(clubs);
+                nextQuestion(); // 다음 질문으로 이동합니다.
             });
+
+            $("#C").click(function () {
+                // C 버튼을 클릭했을 때 C의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                var clubs = q[num]["C"]["club"];
+                increaseClubValues(clubs);
+                nextQuestion(); // 다음 질문으로 이동합니다.
+            });
+
+            $("#D").click(function () {
+                // D 버튼을 클릭했을 때 D의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                var clubs = q[num]["D"]["club"];
+                increaseClubValues(clubs);
+                nextQuestion(); // 다음 질문으로 이동합니다.
+            });
+
+            $("#E").click(function () {
+                // E 버튼을 클릭했을 때 E의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                var clubs = q[num]["E"]["club"];
+                increaseClubValues(clubs);
+                nextQuestion(); // 다음 질문으로 이동합니다.
+            });
+
+            $("#F").click(function () {
+                // F 버튼을 클릭했을 때 F의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                var clubs = q[num]["F"]["club"];
+                increaseClubValues(clubs);
+                nextQuestion(); // 다음 질문으로 이동합니다.
+            });
+
+            function increaseClubValues(clubs) {
+                for (var i = 0; i < clubs.length; i++) {
+                    var clubId = clubs[i].toLowerCase(); // 동아리 종류에 따라 ID를 소문자로 변환합니다.
+                    var currentValue = parseInt($("#" + clubId).val());
+                    $("#" + clubId).val(currentValue + 1); // 해당하는 동아리 종류의 값을 1 증가시킵니다.
+                }
+            }
     
             function nextQuestion() {
-                // $(".q-num").html('Q' + num);
-                // 여기서는 progress 변수를 증가시켜 나아가는 상황을 가정합니다.
-                // 실제로는 MBTI 테스트 진행 상황에 따라 로직을 구성해야 합니다.
-                progress += 10; // 예시로 10%씩 증가시킵니다.
-                if (progress > 100) {
-                    progress = 100; // 최대 값 설정
+                if (num == 13) { //1번
+                    var mbti = ""; //2번
+                    //3번
+                    ($("#EI").val() < 2) ? mbti += "I" : mbti += "E";
+                    ($("#SN").val() < 2) ? mbti += "N" : mbti += "S";
+                    ($("#TF").val() < 2) ? mbti += "F" : mbti += "T";
+                    ($("#JP").val() < 2) ? mbti += "P" : mbti += "J";
+
+                    window.location.href = "./result/" + mbti; //4번
+
+                } else {
+                    // $(".q-num").html('Q' + num);
+                    // 여기서는 progress 변수를 증가시켜 나아가는 상황을 가정합니다.
+                    // 실제로는 MBTI 테스트 진행 상황에 따라 로직을 구성해야 합니다.
+                    progress += 10; // 예시로 10%씩 증가시킵니다.
+                    if (progress > 100) {
+                        progress = 100; // 최대 값 설정
+                    }
+        
+                    document.getElementById("progress").style.width = progress + "%";
+        
+                    $("#title").html(q[num]["title"]);
+                    $("#type").val(q[num]["type"]);
+                    $("#A").html(q[num]["A"]["content"]);
+                    $("#B").html(q[num]["B"]["content"]);
+                    if (q[num]["C"]) {
+                        $("#C").html(q[num]["C"]["content"]);
+                    }
+                    $("#D").html(q[num]["D"]["content"]);
+                    $("#E").html(q[num]["E"]["content"]);
+                    $("#F").html(q[num]["F"]["content"]);
+
+                    // 버튼이 "대답"인 경우 숨기기
+                    // if ($("#C").html() === "대답") $("#C").hide();
+                    // if ($("#D").html() === "대답") $("#D").hide();
+                    // if ($("#E").html() === "대답") $("#E").hide();
+                    // if ($("#F").html() === "대답") $("#F").hide();
+                    
+                    num++;
                 }
-    
-                document.getElementById("progress").style.width = progress + "%";
-    
-                $("#title").html(q[num]["title"]);
-                $("#type").val(q[num]["type"]);
-                $("#A").html(q[num]["A"]);
-                $("#B").html(q[num]["B"]);
-                num++;
             }
         </script>
 </body>
