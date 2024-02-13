@@ -7,19 +7,36 @@
     <title>동아리 매칭 TEST</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
+        #progressBar {
+            width: 70%; /* 화면의 80% 정도의 길이를 가지도록 설정합니다. */
+            background-color: #ededed;
+            margin: 0 auto; /* 화면의 중앙에 위치하도록 설정합니다. */
+            border-radius: 10px; /* 모든 모서리에 동일한 반지름을 적용합니다. */
+        }
+
+        #progress {
+            width: 10%;
+            height: 30px;
+            background-color: #0c6ca4;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            border-radius: 10px; /* 모든 모서리에 동일한 반지름을 적용합니다. */
+        }
+
         input[type=radio]{
             display: none;
             margin:10px;
         }
         input[type=radio]+label{
             display:inline-block;
-            margin:2px;
-            padding: 8px 19px;
+            margin: 8px;
+            padding: 40px 20px;
             background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            border-radius: 12px;
-            font-size: 13px !important;
-            width: 70%;
+            border: 1.5px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px !important;
+            width: 35%;
             text-align:center;
         }
         input[type=radio]:checked+label{
@@ -31,22 +48,35 @@
         }
         a {
         text-decoration-color: #0c6ca4;
+        text-decoration: none;
         }
+        h5 {
+            font-weight: bold; /* 볼드체 적용 */
+        }
+        .btn.btn-primary {
+            border: none; /* 테두리를 없앱니다. */
+            font-size: 16px;
+            padding: 8px 16px;
+        }
+
     </style>
 </head>
 <body>
     <header>
         <div class="py-4 text-center">
-            <a href="./index.html"><h3><b>동아리 매칭 TEST</h1></a>
+            <a href="../index.html"><h2><b>CLUB Matching TEST</h2></a>
+        </div><br>
+        <div id="progressBar">
+            <div id="progress"></div>
         </div>
+        <br><br>
     </header>
     <section>
         <div class="py-4 text-center">
             <article>
                 <div class="container">
                     <form class="form"  action="question1.html">
-                        <h4>문제1</h2>
-                        <p>첫 등교날, OT가 끝난 후 나는<br></p>
+                        <h5>첫 등교날, OT가 끝난 후 나는<br><br></h5><br>
                         <div>
                             <input type="radio" name="question1" id="1-1" class="I_btn" value="I">
                             <label for="1-1">바로 집으로 가 나만의 시간을 보낸다</label>
@@ -54,9 +84,9 @@
                         <div>
                             <input type="radio" name="question1" id="1-2" class="E_btn" value="E">
                             <label for="1-2">새로 사귄 친구들과 함께 학교 투어를 한다</label>
-                        </div>
+                        </div><br><br>
                         <div class="py-4 text-center">
-                            <button type="submit" class="btn btn-primary m-1" onclick="saveAndProceed()">다음</button>
+                            <button type="submit" class="btn btn-primary m-1" onclick="nextQuestion()">NEXT</button>
                         </div>
                     </form>
                     <br>
@@ -67,13 +97,17 @@
     <footer>
     </footer>
     <script>
-        function saveAndProceed() {
-            // 선택된 값을 가져와서 로컬 저장소에 저장
-            const selectedValue = document.querySelector('input[name="question1"]:checked').value;
-            localStorage.setItem('question1', selectedValue);
+        let progress = 0;
 
-            // 다음 페이지로 이동
-            window.location.href = "question2.html";
+        function nextQuestion() {
+            // 여기서는 progress 변수를 증가시켜 나아가는 상황을 가정합니다.
+            // 실제로는 MBTI 테스트 진행 상황에 따라 로직을 구성해야 합니다.
+            progress += 10; // 예시로 10%씩 증가시킵니다.
+            if (progress > 100) {
+                progress = 100; // 최대 값 설정
+            }
+
+            document.getElementById("progress").style.width = progress + "%";
         }
     </script>
 </body>
