@@ -26,30 +26,38 @@
             background-color: #0c6ca4;
             color:#fff;
         }
+        .btn-primary {
+        background-color: #0c6ca4 !important;
+        }
+        a {
+        text-decoration-color: #0c6ca4;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="py-4 text-center">
-            <a href="index.html"><h3><b>동아리 매칭 TEST</h1></a>
+            <a href="./index.html"><h3><b>동아리 매칭 TEST</h1></a>
         </div>
     </header>
     <section>
         <div class="py-4 text-center">
             <article>
                 <div class="container">
-                    <form class="form" action="question2.html">
+                    <form class="form"  action="question1.html">
                         <h4>문제1</h2>
                         <p>첫 등교날, OT가 끝난 후 나는<br></p>
                         <div>
-                            <input type="radio" name="EI" id="1-1" class="I_btn">
+                            <input type="radio" name="question1" id="1-1" class="I_btn" value="I">
                             <label for="1-1">바로 집으로 가 나만의 시간을 보낸다</label>
                         </div>
                         <div>
-                            <input type="radio" name="EI" id="1-2" class="E_btn">
+                            <input type="radio" name="question1" id="1-2" class="E_btn" value="E">
                             <label for="1-2">새로 사귄 친구들과 함께 학교 투어를 한다</label>
                         </div>
-                        <button type="submit" class="btn btn-primary m-1">다음</button>
+                        <div class="py-4 text-center">
+                            <button type="submit" class="btn btn-primary m-1" onclick="saveAndProceed()">다음</button>
+                        </div>
                     </form>
                     <br>
                 </div>
@@ -58,5 +66,15 @@
     </section>
     <footer>
     </footer>
+    <script>
+        function saveAndProceed() {
+            // 선택된 값을 가져와서 로컬 저장소에 저장
+            const selectedValue = document.querySelector('input[name="question1"]:checked').value;
+            localStorage.setItem('question1', selectedValue);
+
+            // 다음 페이지로 이동
+            window.location.href = "question2.html";
+        }
+    </script>
 </body>
 </html>
