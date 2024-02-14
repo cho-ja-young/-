@@ -77,7 +77,7 @@
         </header>
         <h5 id="title">문제</h5><br><br>
         <!--1번-->
-        <input id="type" type="hidden" value="EI">
+        <input id="clubId" type="hidden" value="beverage">
         <!--2번-->
         <button id="A" type="button" class="btn">대답</button><br>
         <button id="B" type="button" class="btn">대답</button><br>
@@ -335,23 +335,37 @@
                     document.getElementById("progress").style.width = progress + "%";
         
                     $("#title").html(q[num]["title"]);
-                    $("#type").val(q[num]["type"]);
+                    // $("#clubId").val(q[num]["club"]);
                     $("#A").html(q[num]["A"]["content"]);
                     $("#B").html(q[num]["B"]["content"]);
                     if (q[num]["C"]) {
+                        $("#C").show();
                         $("#C").html(q[num]["C"]["content"]);
+                    } else {
+                        $("#C").hide();
                     }
-                    $("#D").html(q[num]["D"]["content"]);
-                    $("#E").html(q[num]["E"]["content"]);
-                    $("#F").html(q[num]["F"]["content"]);
-
-                    // 버튼이 "대답"인 경우 숨기기
-                    // if ($("#C").html() === "대답") $("#C").hide();
-                    // if ($("#D").html() === "대답") $("#D").hide();
-                    // if ($("#E").html() === "대답") $("#E").hide();
-                    // if ($("#F").html() === "대답") $("#F").hide();
+                    if (q[num]["D"]) {
+                        $("#D").show();
+                        $("#D").html(q[num]["D"]["content"]);
+                    } else {
+                        $("#D").hide();
+                    }
+                    if (q[num]["E"]) {
+                        $("#E").show();
+                        $("#E").html(q[num]["E"]["content"]);
+                    } else {
+                        $("#E").hide();
+                    }
+                    if (q[num]["F"]) {
+                        $("#F").show();
+                        $("#F").html(q[num]["F"]["content"]);
+                    } else {
+                        $("#F").hide();
+                    }
                     
                     num++;
+
+                    console.log(num);
                 }
             }
         </script>
