@@ -259,6 +259,7 @@
             function start() {
                 $(".start").hide();
                 $(".question").show();
+                console.log("지금 시작페이지" + num);
                 nextQuestion();
             }
     
@@ -266,6 +267,7 @@
                 // A 버튼을 클릭했을 때 A의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
                 var clubs = q[num]["A"]["club"];
                 increaseClubValues(clubs);
+                num++;
                 nextQuestion(); // 다음 질문으로 이동합니다.
             });
 
@@ -273,6 +275,7 @@
                 // B 버튼을 클릭했을 때 B의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
                 var clubs = q[num]["B"]["club"];
                 increaseClubValues(clubs);
+                num++;
                 nextQuestion(); // 다음 질문으로 이동합니다.
             });
 
@@ -280,6 +283,7 @@
                 // C 버튼을 클릭했을 때 C의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
                 var clubs = q[num]["C"]["club"];
                 increaseClubValues(clubs);
+                num++;
                 nextQuestion(); // 다음 질문으로 이동합니다.
             });
 
@@ -287,6 +291,7 @@
                 // D 버튼을 클릭했을 때 D의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
                 var clubs = q[num]["D"]["club"];
                 increaseClubValues(clubs);
+                num++;
                 nextQuestion(); // 다음 질문으로 이동합니다.
             });
 
@@ -294,6 +299,7 @@
                 // E 버튼을 클릭했을 때 E의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
                 var clubs = q[num]["E"]["club"];
                 increaseClubValues(clubs);
+                num++;
                 nextQuestion(); // 다음 질문으로 이동합니다.
             });
 
@@ -301,6 +307,7 @@
                 // F 버튼을 클릭했을 때 F의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
                 var clubs = q[num]["F"]["club"];
                 increaseClubValues(clubs);
+                num++;
                 nextQuestion(); // 다음 질문으로 이동합니다.
             });
 
@@ -313,15 +320,41 @@
             }
     
             function nextQuestion() {
-                if (num == 13) { //1번
-                    var mbti = ""; //2번
+                if (num == 11) { //1번
+                    var clubType = ""; //2번
                     //3번
-                    ($("#EI").val() < 2) ? mbti += "I" : mbti += "E";
-                    ($("#SN").val() < 2) ? mbti += "N" : mbti += "S";
-                    ($("#TF").val() < 2) ? mbti += "F" : mbti += "T";
-                    ($("#JP").val() < 2) ? mbti += "P" : mbti += "J";
+                    // 주어진 변수들과 그 값들
+                    var beverage = $("#beverage").val();
+                    var computer = $("#computer").val();
+                    var culture = $("#culture").val();
+                    var dance = $("#dance").val();
+                    var entertainment = $("#entertainment").val();
+                    var instrument = $("#instrument").val();
+                    var language = $("#language").val();
+                    var marketing = $("#marketing").val();
+                    var pe = $("#pe").val();
+                    var religion = $("#religion").val();
+                    var unusual = $("#unusual").val();
+                    var volunteer = $("#volunteer").val();
 
-                    window.location.href = "./result/" + mbti; //4번
+                    // 값들을 배열에 저장
+                    var values = [beverage, computer, culture, dance, entertainment, instrument, language, marketing, pe, religion, unusual, volunteer];
+
+                    // 가장 큰 값을 가진 변수명 찾기
+                    var maxIndex = 0;
+                    var maxValue = values[0];
+                    for (var i = 1; i < values.length; i++) {
+                        if (parseInt(values[i]) > parseInt(maxValue)) {
+                            maxIndex = i;
+                            maxValue = values[i];
+                        }
+                    }
+
+                    // 가장 큰 값을 가진 변수명 출력
+                    var variables = ['beverage', 'computer', 'culture', 'dance', 'entertainment', 'instrument', 'language', 'marketing', 'pe', 'religion', 'unusual', 'volunteer'];
+                    var clubType = variables[maxIndex];
+
+                    window.location.href = "./result/" + clubType; //4번
 
                 } else {
                     // $(".q-num").html('Q' + num);
@@ -334,6 +367,8 @@
         
                     document.getElementById("progress").style.width = progress + "%";
         
+                    console.log("지금 번호 : " + num);
+
                     $("#title").html(q[num]["title"]);
                     // $("#clubId").val(q[num]["club"]);
                     $("#A").html(q[num]["A"]["content"]);
@@ -362,10 +397,7 @@
                     } else {
                         $("#F").hide();
                     }
-                    
-                    num++;
 
-                    console.log(num);
                 }
             }
         </script>
