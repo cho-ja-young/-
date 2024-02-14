@@ -16,7 +16,21 @@
             background:#fff;
             text-align: center;
             z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
+            animation: changeBackgroundColor 3.3s infinite; /* 배경색 변화 애니메이션 */
         }
+        @keyframes changeBackgroundColor {
+        0% { background-color: #fff; } /* 시작 색상 */
+        25% { background-color: #a7ffda; }
+        50% { background-color: #87cdff; } /* 중간 색상 */
+        75% { background-color: #a7b6ff; }
+        100% { background-color: #ffc2ec; } /* 최종 색상 */
+        }
+
+        /* 로딩창 안의 색상 변경을 위한 클래스 */
+        .inner-content {
+            color: #0c6ca4; /* 초기 색상 */
+        }
+
         div#result_content{
             border: 2px solid #0c6ca4;
             width: 80%;
@@ -46,14 +60,28 @@
             text-align:center;
             transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
         }
+        /* progress bar의 스타일 수정 */
+        .progress {
+            border-radius: 10px; /* 둥근 테두리 반경 설정 */
+            height: 30px; /* progress bar의 높이 설정 */
+            font-size: 16px; /* progress bar의 글꼴 크기 설정 */
+            line-height: 30px; /* progress bar의 텍스트 세로 중앙 정렬 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress-bar {
+            border-radius: 10px; /* 둥근 테두리 반경 설정 */
+            height: 30px; /* progress bar의 높이 설정 */
+            font-size: 16px; /* progress bar의 글꼴 크기 설정 */
+            line-height: 30px; /* progress bar의 텍스트 세로 중앙 정렬 */
+            background-color: #0c6ca4;
+        }
     </style>
     <script>
         setTimeout(function() {
             let loading_page = document.getElementById("load_pg");
             loading_page.style.visibility="hidden";
-        }, 1100);
+        }, 3300);
         function restart(){
-
             location.href="../qtestnew.html"
         }
     </script>
