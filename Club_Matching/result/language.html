@@ -7,53 +7,108 @@
     <title>동아리 매칭 TEST</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-        #load_pg{
-            width:100%;
-            height:100%;
-            position:fixed;
-            left:0px;
-            top:0px;
-            background:#fff;
-            text-align: center;
-            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
-        }
-        div#result_content{
-            border: 2px solid #0c6ca4;
-            width: 80%;
-            margin: auto;
-            border-radius: 12px;
-        }
-        .btn.btn-primary {
-            background-color: #0c6ca4 !important;
-            font-size: 30px;
-            padding: 15px 30px;
-            width: 15%;
-        }
         a {
             text-decoration-color: #0c6ca4;
             text-decoration: none;
         }
+        #load_pg{
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#fff;
+            text-align: center;
+            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
+            animation: changeBackgroundColor 3s infinite; /* 배경색 변화 애니메이션 */
+        }
+        @keyframes changeBackgroundColor {
+        0% { background-color: #fff; } /* 시작 색상 */
+        25% { background-color: #bae6ff; }
+        50% { background-color: #8dd5ff; } /* 중간 색상 */
+        75% { background-color: #62c5ff; }
+        100% { background-color: #46bbff; } /* 최종 색상 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress {
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            border-radius: 10px; /* 둥근 테두리 반경 설정 */
+            height: 30px; /* progress bar의 높이 설정 */
+            overflow: hidden; /* 넘치는 부분 숨기기 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress-bar {
+            height: 100%;
+            background-color: #0c6ca4; /* 초기 색상 설정 */
+            width: 80%; /* 초기 너비 설정 */
+            transition: width 3.3s ease; /* 너비 변화에 따른 전환 효과 */
+        }
+        div#result_content{
+            border: 0.4vw solid #0c6ca4;
+            width: 90%;
+            margin: auto;
+            border-radius: 1.2vw;
+            font-size: 1.6vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
+        /* text-name 클래스의 스타일 */
+        .text-name {
+            font-size: 3.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+        }
+        /* text-primary 클래스의 스타일 */
+        .text-primary {
+            font-size: 3vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
+        /* text-content 클래스의 스타일 */
+        .text-content {
+            font-size: 2.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
         .btn {
             display:inline-block;
-            margin: 8px;
-            padding: 40px 20px;
+            margin: 1vw;
+            padding: 2vw 3vw;
             background-color: #f5f5f5;
-            border: 1.5px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px !important;
+            border: 0.15vw solid #ccc;
+            border-radius: 1.5vw;
+            font-size: 1.5vw !important;
             font-weight: bold;
-            width: 27%;
+            width: auto;
             text-align:center;
             transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
+        }
+        .btn.btn-primary {
+            background-color: #0c6ca4 !important;
+            font-size: 2.5vw;
+            padding: 2.5% 3.5%;
+            width: auto;
         }
     </style>
     <script>
         setTimeout(function() {
             let loading_page = document.getElementById("load_pg");
             loading_page.style.visibility="hidden";
-        }, 1100);
-        function restart(){
 
+            // 진행 바 색상 및 너비 조절
+            let progressBar = document.getElementById("progress-bar");
+            let width = 0;
+            let interval = setInterval(frame, 100); // 100ms마다 프레임 갱신
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 10;
+                    progressBar.style.width = width + "%";
+                }
+            }
+        }, 3000);
+
+        function restart(){
             location.href="../qtestnew.html"
         }
     </script>
@@ -63,9 +118,9 @@
         <div style="position:absolute; top:25%; left:25%; width: 50%;">
             <h1>Loading...</h1>
         </div>
-        <div class="progress" style="position:absolute; top:50%; left:25%; width: 50%;">
-            <div class="progress-bar progress-bar-striped active" role="progressbar"
-            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar"
+                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>
@@ -78,17 +133,27 @@
             </header>
             <article>
                 <div class="py-2 text-center m-1">
-                    <h3 class="text-primary"><b>언어학습을 하고 싶은 어스인</b></h3>
+                    <h4 class="text-name"><b><span style="color: #0c6ca4;">언어학습</span>을 하고 싶은 어스인</b></h4><br>
                 </div>
                 <div class="py-3 text-center">
-                    <img src="../image/language/japanese.png" style="width: 30%; text-align: center;">
+                    <h3 class="text-name"><b>▶ NEWSWEEK ◀</b></h3><br>
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>뉴스위크지 응용방법 연구와 토론을 통한 영어교육에 대한 올바른 사상함양</b></h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 일본어회화반 ◀</b></h3><br>
+                    <img src="../image/language/japanese.png" style="width: 60%; text-align: center;"><br>
+                    <img src="../image/language/japanese2.png" style="width: 60%; text-align: center;">
                 </div><br>
                 <div id="result_content" class="p-3">
-                    <ul>
-                        <h4 class="text-primary"><b>일본어회화반</b></h4>
-                        <li>특징1 : 커피와 관련된 이론 공부 및 창업 정보 공유</li>
-                        <li>특징2 : 다도의 전통문화를 계승하고 창조적으로 발전시켜, 이를 널리 홍보하고 친목 도모</li>
-                    </ul>
+                    <h5 class="text-primary"><b>안녕하세요 신입생 여러분!</b>
+                        <br><br>단국대학교 일본어회화반은 다양한 일본 문화 및 언어를 교류하는 동아리입니다.
+                    </h5>
+                    <h5 class="text-primary"><b>1: 자유로운 활동 & 취미를 공유하고 싶다면?</b></h5>
+                    <h6 class="text-content">단국대학교 일본어회화반은 자유로운 분위기의 동아리로 J-POP, 드라마, 애니메이션 등을 비롯하여 다양한 일본 문화에 관심이 있는 사람들끼리 교류하는 것이 주목적인 동아리입니다.</h6>
+                    <h5 class="text-primary"><b>2: 스터디로 내 실력을 향상시키고 싶다면?</b></h5>
+                    <h6 class="text-content">자율적으로 참여할 수 있는 일본어 스터디 반도 운영하고 있습니다. 스터디 반은 일본어로 부원들과 함께 여러 가지 주제에 대해서 대화를 나누는 과정을 통해 회화 실력을 키우는 것을 목표로 하는 회화반과, 문법을 비롯하여 여러 가지 학문적인 부분을 중점으로 공부하여 JLPT 자격증 시험 합격을 목표로 하는 JLPT 스터디 반이 있습니다. 두 스터디반 모두 필수 활동이 아니며, 개개인의 일본어 실력에 맞춰 스터디 반을 구성하기 때문에 부담 없이 신청할 수 있습니다.</h6>
                 </div><br><br>
             </article>
             <footer>
