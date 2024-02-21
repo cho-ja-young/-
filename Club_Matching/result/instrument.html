@@ -7,53 +7,108 @@
     <title>동아리 매칭 TEST</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-        #load_pg{
-            width:100%;
-            height:100%;
-            position:fixed;
-            left:0px;
-            top:0px;
-            background:#fff;
-            text-align: center;
-            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
-        }
-        div#result_content{
-            border: 2px solid #0c6ca4;
-            width: 80%;
-            margin: auto;
-            border-radius: 12px;
-        }
-        .btn.btn-primary {
-            background-color: #0c6ca4 !important;
-            font-size: 30px;
-            padding: 15px 30px;
-            width: 15%;
-        }
         a {
             text-decoration-color: #0c6ca4;
             text-decoration: none;
         }
+        #load_pg{
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#fff;
+            text-align: center;
+            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
+            animation: changeBackgroundColor 3s infinite; /* 배경색 변화 애니메이션 */
+        }
+        @keyframes changeBackgroundColor {
+        0% { background-color: #fff; } /* 시작 색상 */
+        25% { background-color: #bae6ff; }
+        50% { background-color: #8dd5ff; } /* 중간 색상 */
+        75% { background-color: #62c5ff; }
+        100% { background-color: #46bbff; } /* 최종 색상 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress {
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            border-radius: 10px; /* 둥근 테두리 반경 설정 */
+            height: 30px; /* progress bar의 높이 설정 */
+            overflow: hidden; /* 넘치는 부분 숨기기 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress-bar {
+            height: 100%;
+            background-color: #0c6ca4; /* 초기 색상 설정 */
+            width: 80%; /* 초기 너비 설정 */
+            transition: width 3.3s ease; /* 너비 변화에 따른 전환 효과 */
+        }
+        div#result_content{
+            border: 0.4vw solid #0c6ca4;
+            width: 90%;
+            margin: auto;
+            border-radius: 1.2vw;
+            font-size: 1.6vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
+        /* text-name 클래스의 스타일 */
+        .text-name {
+            font-size: 3.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+        }
+        /* text-primary 클래스의 스타일 */
+        .text-primary {
+            font-size: 3vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
+        /* text-content 클래스의 스타일 */
+        .text-content {
+            font-size: 2.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
         .btn {
             display:inline-block;
-            margin: 8px;
-            padding: 40px 20px;
+            margin: 1vw;
+            padding: 2vw 3vw;
             background-color: #f5f5f5;
-            border: 1.5px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px !important;
+            border: 0.15vw solid #ccc;
+            border-radius: 1.5vw;
+            font-size: 1.5vw !important;
             font-weight: bold;
-            width: 27%;
+            width: auto;
             text-align:center;
             transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
+        }
+        .btn.btn-primary {
+            background-color: #0c6ca4 !important;
+            font-size: 2.5vw;
+            padding: 2.5% 3.5%;
+            width: auto;
         }
     </style>
     <script>
         setTimeout(function() {
             let loading_page = document.getElementById("load_pg");
             loading_page.style.visibility="hidden";
-        }, 1100);
-        function restart(){
 
+            // 진행 바 색상 및 너비 조절
+            let progressBar = document.getElementById("progress-bar");
+            let width = 0;
+            let interval = setInterval(frame, 100); // 100ms마다 프레임 갱신
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 10;
+                    progressBar.style.width = width + "%";
+                }
+            }
+        }, 3000);
+
+        function restart(){
             location.href="../qtestnew.html"
         }
     </script>
@@ -63,9 +118,9 @@
         <div style="position:absolute; top:25%; left:25%; width: 50%;">
             <h1>Loading...</h1>
         </div>
-        <div class="progress" style="position:absolute; top:50%; left:25%; width: 50%;">
-            <div class="progress-bar progress-bar-striped active" role="progressbar"
-            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar"
+                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>
@@ -78,17 +133,138 @@
             </header>
             <article>
                 <div class="py-2 text-center m-1">
-                    <h3 class="text-primary"><b>악기 연주가 좋은 어스인</b></h3>
+                    <h4 class="text-name"><b><span style="color: #0c6ca4;">악기 연주</span>가 좋은 어스인</b></h4><br>
                 </div>
                 <div class="py-3 text-center">
-                    <img src="../image/instrument/muse.png" style="width: 30%; text-align: center;">
+                    <h3 class="text-name"><b>▶ 가객 ◀</b></h3><br>
+                    <img src="../image/instrument/ga.png" style="width: 80%; text-align: center;">
                 </div><br>
                 <div id="result_content" class="p-3">
-                    <ul>
-                        <h4 class="text-primary"><b>MUSE</b></h4>
-                        <li>특징1 : 커피와 관련된 이론 공부 및 창업 정보 공유</li>
-                        <li>특징2 : 다도의 전통문화를 계승하고 창조적으로 발전시켜, 이를 널리 홍보하고 친목 도모</li>
-                    </ul>
+                    <h5 class="text-primary"><b>💚 단국대학교 어쿠스틱 밴드 중앙동아리 가객 💚</b></h5>
+                    <h5 class="text-primary"><b>🎤 가객은 어떤 동아리인가요 ?</b></h5>
+                    <h6 class="text-content">💬 안녕하세요 가객입니다 !
+                        <br>저희 가객은 1996년 김광석 선생님 별세 후 추모의 의미로 창립된 어쿠스틱 음악을 주로 다루는 밴드 동아리입니다.
+                    </h6>
+                    <h5 class="text-primary"><b>🎤 음악을 많이 접하지 않았어도 괜찮나요 ?</b></h5>
+                    <h6 class="text-content">💬가객은 많은 학우분들이 부담없이 음악을 시작하고, 함께 음악경험을 쌓으며  즐거움을 고취하는 것을 최고가치로 지향하고 있습니다.
+                        <br>따라서 별도의 오디션이 없으며 악기교실과 같은 초보자 부원분들을 위한 활동도 준비되어 있습니다 !
+                    </h6>
+                    <h5 class="text-primary"><b>🎤 개인악기가 없어도 괜찮나요 ?</b></h5>
+                    <h6 class="text-content">💬동이리방과 연습실에 전자피아노,기타,일렉기타,베이스 외 소형악기까지 공용으로 구비되어 있습니다 !</h6>
+                    <h5 class="text-primary"><b>🎤 꼭 어쿠스틱 음악만 해야 하나요 ?</b></h5>
+                    <h6 class="text-content">💬어쿠스틱 음악을 중심으로 하지만 여러 장르로의 확장도 열려있습니다. 유튜브 영상을 통해 확인하시면 도움이 될 것 같습니다 !</h6>
+                    <h5 class="text-primary"><b>🎤 동아리방 위치와 시설은 어떻게 되나요 ?</b></h5>
+                    <h6 class="text-content">💬 동아리방은 혜당관 6층 603호 , 연습실은 605호에 위치하고 있습니다 ! (우리은행 방향 반대편)
+                        <br><br>☝️ 동아리방(603호)에는  연습용 공용기타 , 공용피아노 , 카혼 및 하모니카, 우쿨렐레와같은 소형악기가 비치되어 있으며 소파,스마트TV,전자레인지 ,냉장고 등 편의시설 또한 구비되어 있습니다 !
+                        <br><br>✌️ 다음으로 연습실(605호)는 드럼,피아노,믹서,스피커,각종 앰프 등 합주 및 연주를 위한 장비가 구비되어 있습니다 !
+                    </h6>
+                    <h5 class="text-primary"><b>✅ 주요 활동계획</b></h5>
+                    <h6 class="text-content">- 개강총회
+                        <br><br>- 짝선배 짝후배 등 친목활동
+                        <br><br>- 교내외 버스킹 (폭포공원,한강 등)
+                        <br><br>- 연습,합주 촬영 및 유튜브 업로드
+                        <br><br>- 학기당 1회 정기공연
+                        <br><br>- 악기교실 (기타,피아노,드럼 등)
+                        <br><br>- 축제 공연 참여
+                        <br><br>- MT
+                        <br><br>- 연합 버스킹 (서울,경기권 대학교 밴드부)
+                        <br><br>- 종강총회
+                    </h6>
+                    <h5 class="text-primary"><b>✅ 모집 정보 및 회비</b></h5>
+                    <h6 class="text-content">모집대상 : 학번무관 죽전캠퍼스 재학생
+                        <br><br>회비 : 학기 당 2만원
+                        <br><br>모집기간 : 상시모집
+                    </h6>
+                    <h5 class="text-primary"><b>❗️Youtube : 안녕하세요 가객입니다</b></h5>
+                    <h6 class="text-content">https://youtube.com/@user-uc5oj6kb5l?si=krcl2K0wf3QaN93y</h6>
+                    <h5 class="text-primary"><b>👉가입 신청 폼</b></h5>
+                    <h6 class="text-content">https://forms.gle/DojMpET4TH9iLXxg6</h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 모닥불 ◀</b></h3><br>
+                    <img src="../image/instrument/mo.png" style="width: 80%; text-align: left;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h5 class="text-primary"><b>안녕하세요, 낭만의 상징!!<br>⭐️ 통기타🎶🎸동아리 '모닥불'입니다 !</b></h5>
+                    <h6 class="text-content">❤️ 매주 진행하는 정규 기타교육 시간
+                        <br><br>🧡 선배, 동기들과 함께하는 즐거운 MT
+                        <br><br>💛 학생들이 직접 꾸리는 정기 연주회
+                        <br><br>💚 누구나 사용할 수 있는 동방 연습 기타
+                        <br><br>✏️ 기타 못 치는 사람
+                        <br><br>✏️ 기타 잘 치는 사람
+                        <br><br>✏️ 기타 배워보고 싶은 사람
+                        <br><br>✏️ 악기 하나는 멋있게 다루고 싶다! 하는 사람
+                        <br><br>대학 생활의 아름다운 추억을 저희 ‘모닥불’과 함께 만들어 가시면 좋을 것 같습니다😊
+                    </h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ MUSE ◀</b></h3><br>
+                    <img src="../image/instrument/muse.png" style="width: 80%; text-align: left;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>단국대학교 중앙동아리 ‘MUSE'는 키보드, 드럼, 보컬, 기타, 베이스의 다섯개의 파로 이루어진 밴드 동아리로, 1991년 창설되어 현재도 꾸준한 활동을 이어오고 있습니다.</b></h6>
+                    <h6 class="text-content">저희 동아리는 밴드 음악은 물론 대중음악 전반을 가리지 않고 동아리원들과 공유하고 함께 합주하며 공연까지 이끌어 내는 곳입니다.<br>
+                        ‘MUSE’는 음악에 관심이 있는 많은 단국대학교 학우들과 함께 오랜 시간 동안 많은 친목 도모의 장과 좋아하는 음악으로 직접 무대에 설 수 있는 기회를 잊을 수 없는 추억의 형태로 제공해 왔습니다.
+                        <br><br>‘MUSE’ 동아리의 가장 큰 목적은 밴드의 본분을 잊지 않으면서도 동아리의 역할을 충실히 하는 것입니다. 즉, 저흰 밴드와 동아리 활동의 조화에 가장 큰 중점을 두고 있으며, 이를 위해 동아리 자체적인 공연, 친목활동은 물론 대외적 활동도 최대한 참여하여 두 마리의 토끼를 잡는 것이 ‘MUSE’의 목표입니다.                                                  
+                        <br><br>단국대학교 중앙밴드동아리 ‘MUSE’의 문은 언제나 열려 있습니다.
+                    </h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 자드락 ◀</b></h3><br>
+                    <img src="../image/instrument/za.png" style="width: 80%; text-align: left;">
+                    <img src="../image/instrument/za2.png" style="width: 80%; text-align: right;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>안녕하십니까,<br>
+                        자드락은 36년의 전통을 가진 단국대학교 유일무이 밴드 & 오케스트라가 함께하는 공연예술분과 중앙동아리입니다.</b>
+                    </h6>
+                    <h6 class="text-content">저희 동아리에서는 다양한 장르의 음악을 직접 경험하고 소중한 인연을 만들 수 있는 환경을 만들고자 합니다 !</h6>
+                    <h6 class="text-content">밴드 합주, 오케스트라 앙상블, 밴드와 오케스트라의 협연까지 다양한 곡들을 직접 고르고 합주할 수 있는 좋은 기회를 함께 하면 좋겠습니다!</h6>
+                    <h6 class="text-content">아래는 자드락의 정규 행사 진행에 대한 간략한 소개입니다</h6>
+                    <h6 class="text-content"><b>1. 봄 & 가을 정기 공연</b>
+                        <br>1년의 활동 중 가장 메인이 되는 활동으로 매 학기마다 준비한 곡을 통해 부원들의 노력과 실력을 보여줄 수 있는 가장 큰 행사입니다.
+                    </h6>
+                    <h6 class="text-content"><b>2. 학교 축제 무대</b>
+                        <br>중앙동아리로서 가지는 자리로, 학교 축제에서 수많은 학우 분들께 자드락을 보여줄 수 있는 공연입니다.
+                    </h6>
+                    <h6 class="text-content"><b>3. 동아리 알림제</b>
+                        <br>자드락의 신입 부원 모집 및 동아리 홍보를 위해 진행하는 행사로, 부스 운영과 홍보 공연을 진행합니다.
+                    </h6>
+                    <h6 class="text-content"><b>4. Music Camp</b>
+                        <br>매 학기가 끝나는 여름 방학과 겨울 방학마다 부원들이 직접 악기를 가지고 2박 3일간 엠티를 진행합니다.
+                    </h6>
+                    <h6 class="text-content"><b>5. 신입생 환영회</b>
+                        <br>신입 부원 모집 이후 신입 기수와 활동 기수의 첫 만남을 위한 자리입니다. 
+                    </h6>
+                    <h6 class="text-content"><b>6. 개강총회 및 종강총회</b>
+                        <br>학기의 시작에 앞서 진행할 활동들을 설명하고, 학기가 끝난 이후에는 진행한 활동을 되짚어볼 수 있는 자리입니다.
+                    </h6>
+                    <h6 class="text-content">다양한 사람들과 다양한 음악으로 소통하고자 하는 분들, 음악을 사랑하시는 분들, 즐거운 분위기 속에서 좋은 사람들과 좋은 인연을 만들어 가고 싶으신 분들 모두 자드락과 함께 즐거운 학교 생활을 펼쳐 나가실 수 있길 바랍니다! 
+                        <br><br>문의사항은 자드락 인스타그램 @zadrak_official 다이렉트 메시지를 통해 남겨 주시길 바랍니다. 감사합니다!
+                    </h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 블랙베어즈 ◀</b></h3><br>
+                    <img src="../image/instrument/bb.png" style="width: 80%; text-align: left;">
+                    <img src="../image/instrument/bb2.png" style="width: 80%; text-align: right;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>안녕하십니까 단국대 학우여러분들.<br>
+                        저희 블랙베어즈는 42년이라는 가장 긴, 단국대학교 대표 응원 밴드의 역사를 가지고 있는 정통 락 밴드부 입니다.</b>
+                    </h6>
+                    <h6 class="text-content">학교를 넘어 세상에도 이름을 떨칠만한 영향력있는 밴드가 되는 것이 목표이며 여러분들의 관심과 사랑이 필요합니다!</h6>
+                    <h6 class="text-content">무대의 주인공이 당신이 되지 말란법은 없습니다. 함께할 준비는 언제나 되어있습니다.</h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 다솜합창단 ◀</b></h3><br>
+                    <img src="../image/instrument/da.png" style="width: 80%; text-align: left;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>올해로 창단 45주년을 맞이한 ‘다솜합창단’은 음악과 합창에 관심 있는 단국대 학생들이 모여 적극적인 활동을 이어가고 있는 단국대학교의 대표 중앙동아리입니다.</b></h6>
+                    <h6 class="text-content">다양한 전공의 학생들이 함께 모여 하나의 목소리로 합창하며 어울리는 음들의 조화 속에서 팀워크를 배우고, 감정을 음악으로 승화하여 보다 지적인 자아로 성장하는 것을 목표로 합니다. </h6>
+                    <h6 class="text-content">또한 ‘다솜합창단’은 단국대학교 중앙동아리 가운데 유일하게 업라이트 피아노가 동아리방에 구비되어 있어 단원들이 언제든지 자유롭게 노래 연습을 할 수 있는 좋은 환경을 갖추고 있습니다. 우리 합창단은 음악•예술대학에 재학 중인 학생을 지휘자로 임명하여 전문적이고 체계적인 운영 체계를 갖추어 동아리를 이어나가고 있습니다. </h6>
+                    <h6 class="text-content">동아리의 주요 행사로는 매년 5월 학교 축제 무대와 11월 정기 연주회가 있으며, 이 외에도 합창제 참여, 학교에서 주최하는 행사 등에 참여하기도 합니다. ‘다솜’에서는 합창 외에도 아카펠라, 중창, 악기 연주, 가요, 뮤지컬, 클래식 등 다양한 장르의 음악을 함께 만들어나갈 수 있습니다. </h6>
+                    <h6 class="text-content">’다솜‘은 단국대학교의 다양한 전공의 학생들이 모여 있으며, 음악 전공자들보다 비전공자의 비율이 높습니다. 하지만 모두 전공자 못지않은 열정을 가지고 연주를 준비함으로써 그 규모와 완성도가 매년 발전하고 있습니다. 또한 합창으로 조화와 음악과 더불어 사는 삶의 가치를 경험한 단원들은 졸업 이후에도 OB모임을 통해 정기적으로 모여 음악 활동을 하며 식지 않는 열정을 보이고 있습니다. 재학생들과도 지속적인 교류를 함으로써 동아리가 안정적으로 운영되도록 하고 있습니다. </h6>
                 </div><br><br>
             </article>
             <footer>
