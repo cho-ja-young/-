@@ -7,53 +7,108 @@
     <title>동아리 매칭 TEST</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-        #load_pg{
-            width:100%;
-            height:100%;
-            position:fixed;
-            left:0px;
-            top:0px;
-            background:#fff;
-            text-align: center;
-            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
-        }
-        div#result_content{
-            border: 2px solid #0c6ca4;
-            width: 80%;
-            margin: auto;
-            border-radius: 12px;
-        }
-        .btn.btn-primary {
-            background-color: #0c6ca4 !important;
-            font-size: 30px;
-            padding: 15px 30px;
-            width: 15%;
-        }
         a {
             text-decoration-color: #0c6ca4;
             text-decoration: none;
         }
+        #load_pg{
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#fff;
+            text-align: center;
+            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
+            animation: changeBackgroundColor 3s infinite; /* 배경색 변화 애니메이션 */
+        }
+        @keyframes changeBackgroundColor {
+        0% { background-color: #fff; } /* 시작 색상 */
+        25% { background-color: #bae6ff; }
+        50% { background-color: #8dd5ff; } /* 중간 색상 */
+        75% { background-color: #62c5ff; }
+        100% { background-color: #46bbff; } /* 최종 색상 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress {
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            border-radius: 10px; /* 둥근 테두리 반경 설정 */
+            height: 30px; /* progress bar의 높이 설정 */
+            overflow: hidden; /* 넘치는 부분 숨기기 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress-bar {
+            height: 100%;
+            background-color: #0c6ca4; /* 초기 색상 설정 */
+            width: 80%; /* 초기 너비 설정 */
+            transition: width 3.3s ease; /* 너비 변화에 따른 전환 효과 */
+        }
+        div#result_content{
+            border: 0.4vw solid #0c6ca4;
+            width: 90%;
+            margin: auto;
+            border-radius: 1.2vw;
+            font-size: 1.6vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
+        /* text-name 클래스의 스타일 */
+        .text-name {
+            font-size: 3.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+        }
+        /* text-primary 클래스의 스타일 */
+        .text-primary {
+            font-size: 3vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
+        /* text-content 클래스의 스타일 */
+        .text-content {
+            font-size: 2.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
         .btn {
             display:inline-block;
-            margin: 8px;
-            padding: 40px 20px;
+            margin: 1vw;
+            padding: 2vw 3vw;
             background-color: #f5f5f5;
-            border: 1.5px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px !important;
+            border: 0.15vw solid #ccc;
+            border-radius: 1.5vw;
+            font-size: 1.5vw !important;
             font-weight: bold;
-            width: 27%;
+            width: auto;
             text-align:center;
             transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
+        }
+        .btn.btn-primary {
+            background-color: #0c6ca4 !important;
+            font-size: 2.5vw;
+            padding: 2.5% 3.5%;
+            width: auto;
         }
     </style>
     <script>
         setTimeout(function() {
             let loading_page = document.getElementById("load_pg");
             loading_page.style.visibility="hidden";
-        }, 1100);
-        function restart(){
 
+            // 진행 바 색상 및 너비 조절
+            let progressBar = document.getElementById("progress-bar");
+            let width = 0;
+            let interval = setInterval(frame, 100); // 100ms마다 프레임 갱신
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 10;
+                    progressBar.style.width = width + "%";
+                }
+            }
+        }, 3000);
+
+        function restart(){
             location.href="../qtestnew.html"
         }
     </script>
@@ -63,9 +118,9 @@
         <div style="position:absolute; top:25%; left:25%; width: 50%;">
             <h1>Loading...</h1>
         </div>
-        <div class="progress" style="position:absolute; top:50%; left:25%; width: 50%;">
-            <div class="progress-bar progress-bar-striped active" role="progressbar"
-            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar"
+                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>
@@ -78,17 +133,111 @@
             </header>
             <article>
                 <div class="py-2 text-center m-1">
-                    <h3 class="text-primary"><b>종교 활동이 좋은 어스인</b></h3>
+                    <h4 class="text-name"><b><span style="color: #0c6ca4;">종교 활동</span>이 좋은 어스인</b></h4><br>
                 </div>
                 <div class="py-3 text-center">
-                    <img src="../image/religion/agnus.png" style="width: 30%; text-align: center;">
+                    <h3 class="text-name"><b>▶ 네비게이토 ◀</b></h3><br>
+                    <img src="../image/religion/navi.png" style="width: 70%; text-align: left;">
+                    <img src="../image/religion/navi2.png" style="width: 80%; text-align: right;">
                 </div><br>
                 <div id="result_content" class="p-3">
-                    <ul>
-                        <h4 class="text-primary"><b>가톨릭학생회</b></h4>
-                        <li>특징1 : 커피와 관련된 이론 공부 및 창업 정보 공유</li>
-                        <li>특징2 : 다도의 전통문화를 계승하고 창조적으로 발전시켜, 이를 널리 홍보하고 친목 도모</li>
-                    </ul>
+                    <h5 class="text-primary"><b>#주님의 사랑을 전하는 네비게이토 동아리 알림제
+                        <br>#축구, 농구로 팀웍과 건강을 네비게이토와 함께
+                        <br>#성경 암송으로 은혜 충만한 네비게이토
+                        <br>#연극, 합창, 운동회 등 다양한 활동을 경험하는 네비게이토
+                        <br>#여름엔 바다로, 겨울엔 에버랜드로 함께 떠나는 네비게이토
+                        <br>#네비게이토의 성탄 감사 모임
+                    </b></h5>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ CCC ◀</b></h3><br>
+                    <img src="../image/religion/ccc.png" style="width: 80%; text-align: center;">
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>캠퍼스 복음화를 위한 선교활동</b></h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ UBF ◀</b></h3><br>
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>1대 1 성경 공부로 그리스도의 복음을 전하며, 말씀안에서 새 삶을 얻고 캠퍼스 복음화를 양하는 학생 모임</b></h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ JOY선교회 ◀</b></h3><br>
+                    <img src="../image/religion/joy.png" style="width: 80%; text-align: center;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h5 class="text-primary"><b>🤍JOY(죠이선교회)를 소개합니다🤍</b></h5>
+                    <h5 class="text-primary"><b>죠이(JOY)란?</b></h5>
+                    <h6 class="text-content">JOY는 Jesus first, Others second, You third의 약자로 “예수님을 첫째로 이웃을 둘째로 나 자신을 마지막에 둘 때 참 기쁨(JOY)이 있다" 라는 JOY spirit을 중심으로 활동하고 있는 기독교 동아리입니다.
+                        <br>진리와 사랑이신 예수님을 인격적으로 알아가고, 그 사랑으로 서로 사랑하기위함 모임으로 서로 사랑함을 통해 우리의 마음에 참 기쁨를 발견할 수 있는 JOYful한 공동체입니다~
+                        <br>함께하고 싶으신 단국대 학생 모두 환영합니다!!
+                    </h6>
+                    <h5 class="text-primary"><b>1. 건강한 공동체</b></h5>
+                    <h6 class="text-content">죠이(JOY)는 학원복음화협의회와 단국기독학생연합회(단기연)에 소속된 정식동아리입니다.</h6>
+                    <h5 class="text-primary"><b>2. 전국연합 & 서울 남지부 소속 단국JOY</b></h5>
+                    <h6 class="text-content">죠이(JOY)는 전국에 10개 지부, 50개의 캠퍼스에 있는 연합 동아리이며 단국대(죽전)는 가천대, 동국대,명지대, 서울대, 숙명여대, 숭실대, 숭의여대, 안양대, 중앙대와 함께 서울 남지부에 소속되 어 있습니다.
+                        <br>방학 중에는 남지부 연합으로, 학기중에는 단국대 단독으로 모입니다!                        
+                    </h6>
+                    <h5 class="text-primary"><b>3. 24년도 1학기 활동</b></h5>
+                    <h5 class="text-primary"><b>[정기모임]</b></h5>
+                    <h6 class="text-content">🤍 매주 목요일 저녁 7시~9시
+                        <br>🤍 혜당관 307호 (죠이 동아리방)
+                        <br><br>시험기간 전 2주를 제외한 매주 진행됩니다.
+                    </h6>
+                    <h5 class="text-primary"><b>DTC (제자양육훈련)</b></h5>
+                    <h6 class="text-content">✔️[왕의 십자가_팀켈러]
+                        <br>이번학기에는 신앙서적 [왕의 십자가]로 진행됩니다. 이를 통해 예수님을 알아가고 서로의 이야기를 들으며 예수님에 대해, 우리의 삶에대해 함께 묵상하려고 합니다
+                    </h6>
+                    <h6 class="text-content">이외에도 MT, 아웃팅(서울 시내, 한강, 벚꽃축제, 단풍 놀이, 맛집 탐방, 캠퍼스 투어 등등),여름&겨울 수양회, 해외선교 등 다양한 활동이 있습니다!</h6>
+                    <h6 class="text-content">회장 김하중 010 7331 7940 (파이버19)
+                        <br>간사 이준영 010 4164 2737
+                    </h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 가톨릭학생회 ◀</b></h3><br>
+                    <img src="../image/religion/agnus.png" style="width: 80%; text-align: center;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h5 class="text-primary"><b>🌸 단국대학교 죽전캠퍼스 가톨릭학생회 아뉴스입니다❗ 🌸</b></h5>
+                    <h6 class="text-content">아뉴스는 단국대학교 죽전캠퍼스의 종교분과 소속 중앙동아리로,
+                        <br>1967년 동아리 창설 이래 59년째 전통을 이어가고 있습니다!
+                    </h6>
+                    <h5 class="text-primary"><b>💕 동아리 소개</b></h5>
+                    <h6 class="text-content">정기적인 미사와 더불어 수녀님과 함께하는 주모임을 가집니다.
+                        <br>가톨릭 성월에 맞는 부활절과 성탄절 행사 등 동아리만의 특색있는 활동도 진행합니다.
+                        <br>수녀원 방문, 성지순례 등 외부 활동 역시 활발히 이뤄지고 있습니다!
+                        <br>종교 상관없이 누구든지 환영합니다!
+                    </h6>
+                    <h5 class="text-primary"><b>💕문의❓</b></h5>
+                    <h6 class="text-content">회장: 채해온 안드레아 (010-3045-2429)
+                        <br>동아리 방: 혜당관 402호
+                        <br>언제든지 부담 없이 연락 또는 방문하면 됩니다 :D
+                    </h6>
+                    <h5 class="text-primary"><b>3. 24년도 1학기 활동</b></h5>
+                    <h5 class="text-primary"><b>[정기모임]</b></h5>
+                    <h6 class="text-content">🤍 매주 목요일 저녁 7시~9시
+                        <br>🤍 혜당관 307호 (죠이 동아리방)
+                        <br><br>시험기간 전 2주를 제외한 매주 진행됩니다.
+                    </h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ ASEZ_RGB (가등록 동아리) ◀</b></h3><br>
+                    <img src="../image/religion/asez.png" style="width: 70%; text-align: left;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>ASEZ는 어머니의 마음으로 전 세계에 사랑의 손길을 전하고 있는 하나님의 교회 국제 대학생 봉사단입니다.</b></h6>
+                    <h6 class="text-content">지구촌의 현실적인 문제를 해결하기 위해 미래세대의 주역인 대학생들이 모여서 지친 마음을 치유하고 위로해주시는 어머니의 마음으로 봉사를 진행하고 있습니다!                        
+                        <br><br>또한 저희 ASEZ의 활동을 눈여겨 본 정부 기관으로부터 미국 대통령 자원봉사상, 시장 감사장등 273개의 상을 수여받았고 최근에는 서울시청으로부터 14개의 서울시 의장상을 수여받았습니다.
+                        <br><br>ASEZ_RGB 동아리의 최근 활동으로는 거리정화 활동, 환경을 위한 비건식 실천, 플로깅 활동, 교내 안전시설 점검 및 개선제안 등이 있습니다
+                        <br>또한 국제동아리라는 특성상 외국인 교환학생분들도 함께 다양한 체험을 하실 수 있습니다! 많은 관심 부탁드립니다!
+                    </h6>
+                    <h6 class="text-primary"><b>ASEZ is a global university student volunteer group of the Church of God that is giving a love hand to the world with the heart of a mother.</b></h6>
+                    <h6 class="text-content">In order to solve the real problems of the global community, university students, the leaders of the future generation, are gathering to provide services with the heart of a mother who heals and comforts the tired mind!
+                        <br><br><b>In addition, 273 awards, including the U.S. Presidential Volunteer Award and the Mayor's Appreciation Award, were awarded by government agencies who paid attention to ASEZ's activities, and recently, 14 Seoul City Hall AwardsSeoul City Chairperson Awards were awarded.
+                        <br><br>Recent activities of the ASEZ_RGB club include street purification activities, vegan practices for the environment, plogging activities, and school safety facilities inspection and suggestion for improvement
+                        <br>Also, due to the nature of the international club, foreign exchange students can have various experiences together! Please show a lot of interest!
+                    </b></h6>
                 </div><br><br>
             </article>
             <footer>
