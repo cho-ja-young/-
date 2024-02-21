@@ -7,53 +7,108 @@
     <title>동아리 매칭 TEST</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-        #load_pg{
-            width:100%;
-            height:100%;
-            position:fixed;
-            left:0px;
-            top:0px;
-            background:#fff;
-            text-align: center;
-            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
-        }
-        div#result_content{
-            border: 2px solid #0c6ca4;
-            width: 80%;
-            margin: auto;
-            border-radius: 12px;
-        }
-        .btn.btn-primary {
-            background-color: #0c6ca4 !important;
-            font-size: 30px;
-            padding: 15px 30px;
-            width: 15%;
-        }
         a {
             text-decoration-color: #0c6ca4;
             text-decoration: none;
         }
+        #load_pg{
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#fff;
+            text-align: center;
+            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
+            animation: changeBackgroundColor 3s infinite; /* 배경색 변화 애니메이션 */
+        }
+        @keyframes changeBackgroundColor {
+        0% { background-color: #fff; } /* 시작 색상 */
+        25% { background-color: #bae6ff; }
+        50% { background-color: #8dd5ff; } /* 중간 색상 */
+        75% { background-color: #62c5ff; }
+        100% { background-color: #46bbff; } /* 최종 색상 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress {
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            border-radius: 10px; /* 둥근 테두리 반경 설정 */
+            height: 30px; /* progress bar의 높이 설정 */
+            overflow: hidden; /* 넘치는 부분 숨기기 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress-bar {
+            height: 100%;
+            background-color: #0c6ca4; /* 초기 색상 설정 */
+            width: 80%; /* 초기 너비 설정 */
+            transition: width 3.3s ease; /* 너비 변화에 따른 전환 효과 */
+        }
+        div#result_content{
+            border: 0.4vw solid #0c6ca4;
+            width: 90%;
+            margin: auto;
+            border-radius: 1.2vw;
+            font-size: 1.6vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
+        /* text-name 클래스의 스타일 */
+        .text-name {
+            font-size: 3.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+        }
+        /* text-primary 클래스의 스타일 */
+        .text-primary {
+            font-size: 3vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
+        /* text-content 클래스의 스타일 */
+        .text-content {
+            font-size: 2.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 2.5% 3.5%;
+        }
         .btn {
             display:inline-block;
-            margin: 8px;
-            padding: 40px 20px;
+            margin: 1vw;
+            padding: 2vw 3vw;
             background-color: #f5f5f5;
-            border: 1.5px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px !important;
+            border: 0.15vw solid #ccc;
+            border-radius: 1.5vw;
+            font-size: 1.5vw !important;
             font-weight: bold;
-            width: 27%;
+            width: auto;
             text-align:center;
             transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
+        }
+        .btn.btn-primary {
+            background-color: #0c6ca4 !important;
+            font-size: 2.5vw;
+            padding: 2.5% 3.5%;
+            width: auto;
         }
     </style>
     <script>
         setTimeout(function() {
             let loading_page = document.getElementById("load_pg");
             loading_page.style.visibility="hidden";
-        }, 1100);
-        function restart(){
 
+            // 진행 바 색상 및 너비 조절
+            let progressBar = document.getElementById("progress-bar");
+            let width = 0;
+            let interval = setInterval(frame, 100); // 100ms마다 프레임 갱신
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 10;
+                    progressBar.style.width = width + "%";
+                }
+            }
+        }, 3000);
+
+        function restart(){
             location.href="../qtestnew.html"
         }
     </script>
@@ -63,9 +118,9 @@
         <div style="position:absolute; top:25%; left:25%; width: 50%;">
             <h1>Loading...</h1>
         </div>
-        <div class="progress" style="position:absolute; top:50%; left:25%; width: 50%;">
-            <div class="progress-bar progress-bar-striped active" role="progressbar"
-            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar"
+                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>
@@ -78,17 +133,127 @@
             </header>
             <article>
                 <div class="py-2 text-center m-1">
-                    <h3 class="text-primary"><b>봉사활동이 필요한 어스인</b></h3>
+                    <h4 class="text-name"><b><span style="color: #0c6ca4;">봉사활동</span>이 필요한 어스인</b></h4><br>
                 </div>
                 <div class="py-3 text-center">
-                    <img src="../image/volunteer/cat.png" style="width: 30%; text-align: center;">
+                    <h3 class="text-name"><b>▶ 단비 ◀</b></h3><br>
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>단국대 해비타트의 줄임말로 열악한 주거환경에 놓인 사람들에게 사랑의 집짓기, 사랑의 집고치기 등을 통해 행복한 가정을 일으켜 세워주는 해비타트 운동을 전개함</b></h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 미소 ◀</b></h3><br>
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>상처받은 유기견, 미소지킴이가 함께합니다!</b></h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 선우리 ◀</b></h3><br>
+                    <img src="../image/volunteer/kind.png" style="width: 80%; text-align: center;">
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>1970년 생겨난 봉사동아리로 형제애호를 통한 홍익인간의 이념실천</b></h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 아이사랑 ◀</b></h3><br>
+                    <img src="../image/volunteer/child.png" style="width: 60%; text-align: center;">
                 </div><br>
                 <div id="result_content" class="p-3">
-                    <ul>
-                        <h4 class="text-primary"><b>단냥펀치</b></h4>
-                        <li>특징1 : 커피와 관련된 이론 공부 및 창업 정보 공유</li>
-                        <li>특징2 : 다도의 전통문화를 계승하고 창조적으로 발전시켜, 이를 널리 홍보하고 친목 도모</li>
-                    </ul>
+                    <h5 class="text-primary"><b>[단국대 교육봉사 동아리 아이사랑]</b></h5>
+                    <h6 class="text-primary">저희 동아리는 소외계층 초등 중등 아이들을 대상으로 3곳의 지역아동센터에서 매주 1회 교육봉사를 실시합니다. (횟수와 주기는 상황에 따라 유동적으로 변경)</h6>
+                    <h6 class="text-content">첫째! 졸업을 하기 위한 40시간의 봉사활동 아이사랑을 통해 간편하게 채우기!
+                        <br>둘째! 기왕 해야하는 봉사활동 가치있고 의미잇는 교육봉사로 아이들과 친해지며 채우기! (아이들이 진짜 무지 귀여워요) 
+                        <br>셋째! 동아리의 세심한 관리로 정기적으로 그리고 즐겁게 봉사활동 나가기!
+                    </h6>
+                    <h5 class="text-primary"><b>행사</b></h5>
+                    <h6 class="text-content">첫째! 연 4회의 엠티! 대학생활의 꽃인 엠티를 무려 4번!!이나 즐기며 동기, 선후배간 무한정 친해지기!
+                        <br>둘째! 체육대회, 창립제, 축제 등 다양한 의미있는 행사가 항시 대기 중!
+                        <br>셋째! 어린이날 행사, 센터주관 체육대회 등 다양한 행사로 아이들과 친해질 기회!
+                        <br>넷째! 동아리원끼리의 크고 작은 소모임으로 지루할 틈 없는 학교생활!
+                    </h6>
+                    <h5 class="text-primary"><b>동아리 생활</b></h5>
+                    <h6 class="text-content">첫째! 동아리 집행부가 세심하게 회원 하나하나 관리하여 참여에 소외되는 인원이 없도록 운영!
+                        <br>둘째! 아늑~한 동방에서 언제든지 공강 때 쉬러오고 시험기간에는 밤샘공부도 다 같이!
+                        <br>(주의: 진짜 너무 편해서 못 벗어날 수도 있음)
+                        <br>셋째! 그 어느 곳보다도 돈독하고 따뜻한 선후배관계!
+                    </h6>
+                    <h6 class="text-content">궁금한 점은 회장 연락처 또는 아이사랑 인스타그램 @dku_i.love 로 연락 주시면 빠르게 답변 드리도록 하겠습니다
+                        <br><br>아이사랑과 재밌는 추억 만들고 싶으신 모든 분들을 환영합니다~
+                        <br><br>인스타 : dku_i.love
+                        <br><br>회장 윤혜진 (010-2742-6201)
+                        <br>부회장 류재연 (010-3389-4796)
+                    </h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ UNSA ◀</b></h3><br>
+                    <img src="../image/volunteer/unsa.png" style="width: 80%; text-align: center;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h5 class="text-primary"><b>[동아리 소개]</b></h5>
+                    <h6 class="text-primary">유엔한국협회(UNA)의 산하단체이며 UN의 목적과 이념에 부합하는 활동을 진행하고 있습니다. 또한 단국대학교 죽전캠퍼스 중앙동아리 소속이며 14개 지회(건국, 경기, 경북, 경희, 단국, 동국, 동아, 부산외대, 서울, 성신, 세종, 숙명, 숭실, 전남)와 1개 지부(전국)로 이루어진 연합동아리입니다.</h6>
+                    <h5 class="text-primary"><b>[활동]</b></h5>
+                    <h5 class="text-primary"><b>1. 지회 내 활동</b></h5>
+                    <h6 class="text-content">- 용인시 청년봉사단 활동
+                        <br>- 한강안전캠페인 봉사
+                        <br>- 아동센터봉사
+                        <br>- SDGs 관련 캠페인
+                        <br>- 한국근육장애인협회 여름봉사캠프 보조
+                    </h6>
+                    <h5 class="text-primary"><b>2. 연합활동</b></h5>
+                    <h6 class="text-content">- UN 관련 단체(세계평화의 날 조직위원회, 청년평화의회, SDSN 등)와 공동 프로젝트 및 다양한 활동
+                        <br>- UNSA 소속 여러 대학들과의 MT, 학술대회, 봉사활동 등
+                    </h6>
+                    <h5 class="text-primary"><b>[모집대상]</b></h5>
+                    <h6 class="text-content">단국대 죽전캠퍼스 소속 대학(원)생
+                        <br>활동에 열정적으로 참여해주실 분
+                        <br>다양한 사람들과 만남을 통해 친목을 다지고싶은 분
+                    </h6>
+                    <h5 class="text-primary"><b>[가입비]</b></h5>
+                    <h6 class="text-content">UNSA 단체 등록 및 지회 활동 운영을 위해 1년에 20,000원씩 모으고 있습니다.</h6>
+                    <h5 class="text-primary"><b>[지원방법]</b></h5>
+                    <h6 class="text-content">아래 링크에 지원서를 작성해주세요!
+                        <br>https://forms.gle/UHnBD6LuZwN88pDw5
+                    </h6>
+                    <h5 class="text-primary"><b>[문의]</b></h5>
+                    <h6 class="text-content">회장 : 김건우 010-9730-7819
+                        <br>부회장: 이민호 010-2640-8978
+                        <br>인스타 : unsa_dankook
+                    </h6>
+                    <h6 class="text-content">궁금하신 점은 인스타 DM 혹은 에브리타임 댓글 남겨주시면 해결해드리겠습니다!</h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ Enactus ◀</b></h3><br>
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>기업가정신의 실천으로 지속가능하고 더 나은 세상을 만드는 인액터스입니다.</b></h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 은가비 ◀</b></h3><br>
+                    <img src="../image/volunteer/eungabi.png" style="width: 60%; text-align: center;">
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>중앙동아리인 은가비는 단국대학교 유일무이한 '전공 알림' 동아리입니다.</b></h6>
+                    <h6 class="text-content">매 학기 주변 인근 중고등학교를 통해 각 학과 별로 신청자를 받아 학생들에게 자신의 학과를 소개하고, 전공을 알리는 활동을 주로 하고 있습니다. 
+                        <br>또한 매년 단국대학교 신입생을 대상으로 하는 '예비대학' 행사를 통해 멘토-멘티 관계를 형성하여 멘토링 활동을 진행하는 등 활발한 활동을 하고 있습니다.
+                    </h6>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ 단냥펀치 (가등록 동아리) ◀</b></h3><br>
+                    <img src="../image/volunteer/cat.png" style="width: 70%; text-align: center;"><br><br>
+                    <img src="../image/volunteer/cat2.png" style="width: 70%; text-align: center;">
+                </div><br>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>안녕하세요! 저희는 단국대 교내 길고양이 케어 동아리 단냥펀치입니다.😸</b></h6>
+                    <h5 class="text-primary"><b>🐈 교내 고양이와 함께하는 동아리</b></h5>
+                    <h6 class="text-content">산자락에 위치한 캠퍼스는 우리에게 배움의 터전이지만, 동시에 동물들에게는 삶의 터전입니다. 캠퍼스 내에 살고 있는 많은 생명들 사이에서 고양이들도 당연하게 터를 잡아 살아가고 있습니다. 이들은 학우들의 관심과 귀여움을 받기도 하고 누군가에게는 불편을 끼치기도 합니다.</h6>
+                    <h5 class="text-primary"><b>🧶 다양한 활동; 정기적 배식 & 급식소 정비 & TNR & 후원 굿즈 판매</b></h5>
+                    <h6 class="text-content">단냥펀치는 단순한 보호와 애호를 넘어 고양이들과 그 영역을 체계적으로 관리함으로써 깨끗한 캠퍼스 환경을 만들고 갈등을 해소하기 위해 힘쓰고 있습니다. 교내에 급식소를 운영함으로써 교내 고양이 개체수를 정확히 파악하고 TNR(중성화)를 통해 무분별한 개체수 증가를 방지하고 있으며, 서로를 이해하고 존중하며 행복한 공생을 할 수 있도록 노력하고 있습니다. 이와 같은 동아리 활동을 30여개 이상의 대학에서 좋은 본보기로서 이미 시행하고 있습니다. 단냥펀치는 장기적으로 동물에 대한 인식과 처우의 개선을 희망하며 단국대 학우들과 교내 길냥이들의 아름다운 공생을 추구합니다.</h6>
+                    <h5 class="text-primary"><b>🐾 활동 봉사 시간 지급과 외부 봉사 참여 가능</b></h5>
+                    <h6 class="text-content"> 단냥펀치를 포함한 6개 대학동아리와 유기동물 입양센터 팅커벨프로젝트에서 맺은 협약 덕분에 단냥펀치에서의 일부 활동의 봉사 시간을 인정받을 수 있습니다. 또한 단냥펀치를 포함한 30여 개 대학 동물 복지 관련 동아리에서는 동아리의 안정적 활동 지원과 대학생들의 동물권 인식 함양에 긍정적인 효과를 기대하며 전국 대학교 동물권 동아리 연합 조직을 준비 중입니다. 길고양이를 비롯한 동물들과의 공존을 위해 노력하는 단냥펀치의 앞으로의 활동도 지켜보고 응원해주세요.😽❤</h6>
+                    <h5 class="text-primary"><b>😻 신입 집사 절찬 모집 중!</b></h5>
+                    <h6 class="text-content"> 현재 단냥펀치에서는 단냥이들의 새로운 집사가 되어주실 분들을 모집하고 있습니다. 책임감과 단냥이에 대한 사랑만 가지고 계신 누구든 지원 가능하니 많은 관심 부탁드립니다! 
+                        <br><br>💛 자세한 사항 확인과 단냥이 사진을 비롯한 다양한 제보는 단냥펀치 인스타그램( @dankook_cat) 을 통해 받고 있습니다. 감사합니다.
+                    </h6>
                 </div><br><br>
             </article>
             <footer>
