@@ -7,80 +7,101 @@
     <title>동아리 매칭 TEST</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-        #load_pg{
-            width:100%;
-            height:100%;
-            position:fixed;
-            left:0px;
-            top:0px;
-            background:#fff;
-            text-align: center;
-            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
-            animation: changeBackgroundColor 3.3s infinite; /* 배경색 변화 애니메이션 */
-        }
-        @keyframes changeBackgroundColor {
-        0% { background-color: #fff; } /* 시작 색상 */
-        25% { background-color: #85d1fd; }
-        50% { background-color: #4da7db; } /* 중간 색상 */
-        75% { background-color: #2986bc; }
-        100% { background-color: #0c6ca4; } /* 최종 색상 */
-        }
-
-        /* 로딩창 안의 색상 변경을 위한 클래스 */
-        .inner-content {
-            color: #0c6ca4; /* 초기 색상 */
-        }
-
-        div#result_content{
-            border: 2px solid #0c6ca4;
-            width: 80%;
-            margin: auto;
-            border-radius: 12px;
-        }
-        .btn.btn-primary {
-            background-color: #0c6ca4 !important;
-            font-size: 30px;
-            padding: 15px 30px;
-            width: 15%;
-        }
         a {
             text-decoration-color: #0c6ca4;
             text-decoration: none;
         }
-        .btn {
-            display:inline-block;
-            margin: 8px;
-            padding: 40px 20px;
-            background-color: #f5f5f5;
-            border: 1.5px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px !important;
-            font-weight: bold;
-            width: 27%;
-            text-align:center;
-            transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
+        #load_pg{
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#fff;
+            text-align: center;
+            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
+            animation: changeBackgroundColor 3s infinite; /* 배경색 변화 애니메이션 */
+        }
+        @keyframes changeBackgroundColor {
+        0% { background-color: #fff; } /* 시작 색상 */
+        25% { background-color: #bae6ff; }
+        50% { background-color: #8dd5ff; } /* 중간 색상 */
+        75% { background-color: #62c5ff; }
+        100% { background-color: #46bbff; } /* 최종 색상 */
         }
         /* progress bar의 스타일 수정 */
         .progress {
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 25%;
             border-radius: 10px; /* 둥근 테두리 반경 설정 */
             height: 30px; /* progress bar의 높이 설정 */
-            font-size: 16px; /* progress bar의 글꼴 크기 설정 */
-            line-height: 30px; /* progress bar의 텍스트 세로 중앙 정렬 */
+            overflow: hidden; /* 넘치는 부분 숨기기 */
         }
         /* progress bar의 스타일 수정 */
         .progress-bar {
-            border-radius: 10px; /* 둥근 테두리 반경 설정 */
-            height: 30px; /* progress bar의 높이 설정 */
-            font-size: 16px; /* progress bar의 글꼴 크기 설정 */
-            line-height: 30px; /* progress bar의 텍스트 세로 중앙 정렬 */
-            background-color: #0c6ca4;
+            height: 100%;
+            background-color: #0c6ca4; /* 초기 색상 설정 */
+            width: 80%; /* 초기 너비 설정 */
+            transition: width 3.3s ease; /* 너비 변화에 따른 전환 효과 */
+        }
+        div#result_content{
+            border: 0.4vw solid #0c6ca4;
+            width: 90%;
+            margin: auto;
+            border-radius: 1.2vw;
+            font-size: 1.6vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 0.5vw; /* 패딩을 화면 너비의 비율로 설정 */
+        }
+        /* text-name 클래스의 스타일 */
+        .text-name {
+            font-size: 3.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+        }
+        /* text-primary 클래스의 스타일 */
+        .text-primary {
+            font-size: 2vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+        }
+        .btn {
+            display:inline-block;
+            margin: 1vw;
+            padding: 2vw 3vw;
+            background-color: #f5f5f5;
+            border: 0.15vw solid #ccc;
+            border-radius: 1.5vw;
+            font-size: 1.5vw !important;
+            font-weight: bold;
+            width: auto;
+            text-align:center;
+            transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
+        }
+        .btn.btn-primary {
+            background-color: #0c6ca4 !important;
+            font-size: 2.5vw;
+            padding: 2.5% 3.5%;
+            width: auto;
         }
     </style>
     <script>
         setTimeout(function() {
             let loading_page = document.getElementById("load_pg");
             loading_page.style.visibility="hidden";
-        }, 3300);
+
+            // 진행 바 색상 및 너비 조절
+            let progressBar = document.getElementById("progress-bar");
+            let width = 0;
+            let interval = setInterval(frame, 100); // 100ms마다 프레임 갱신
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 10;
+                    progressBar.style.width = width + "%";
+                }
+            }
+        }, 3000);
+
         function restart(){
             location.href="../qtestnew.html"
         }
@@ -91,9 +112,9 @@
         <div style="position:absolute; top:25%; left:25%; width: 50%;">
             <h1>Loading...</h1>
         </div>
-        <div class="progress" style="position:absolute; top:50%; left:25%; width: 50%;">
-            <div class="progress-bar progress-bar-striped active" role="progressbar"
-            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar"
+                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>
@@ -106,17 +127,51 @@
             </header>
             <article>
                 <div class="py-2 text-center m-1">
-                    <h3 class="text-primary"><b>컴퓨터 학습을 원하는 어스인</b></h3>
+                    <h4 class="text-name"><b><span style="color: #0c6ca4;">컴퓨터 학습</span>을 원하는 어스인</b></h4><br>
                 </div>
                 <div class="py-3 text-center">
-                    <img src="../image/computer/dcc.png" style="width: 30%; text-align: center;">
-                </div><br>
+                    <h3 class="text-name"><b>▶ DCC ◀</b></h3><br>
+                    <img src="../image/computer/dcc.png" style="width: 50%; text-align: center;">
+                </div>
                 <div id="result_content" class="p-3">
                     <ul>
-                        <h4 class="text-primary"><b>DCC</b></h4>
-                        <li>특징1 : 커피와 관련된 이론 공부 및 창업 정보 공유</li>
-                        <li>특징2 : 다도의 전통문화를 계승하고 창조적으로 발전시켜, 이를 널리 홍보하고 친목 도모</li>
+                        <h5 class="text-primary"><b>since 1972. DANKOOK COMPUTER CLUB</b></h5><br>
+                        <h6 class="text-primary"><b>주요활동</b></h6>
+                        <li>학기 별 스터디(Matlab, python, PSpice, 컴활 등)</li>
+                        <li>연 1회 창립제 및 선배특강</li>
+                        <li>개강총회 및 MT 등의 단결활동</li>
+                        <li>대학연합동아리 UNICOSA와의 교류(코딩스터디, 대회 및 연합 OT, MT)</li><br>
+                        <h6 class="text-primary"><b>DCC 자랑</b></h6>
+                        <li>자유롭게 사용가능한 프린터기 및 컴퓨터 3대</li>
+                        <li>공강시간에 함께하기 좋은 카드 및 보드게임</li>
+                        <li>함께 영화 및 축구도 볼 수 있는 빔프로젝터</li>
+                        <li>마지막으로 신입생을 두 팔 벌려 환영하는 짱친절한 부원들!</li>
                     </ul>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ Aegis ◀</b></h3><br>
+                </div>
+                <div id="result_content" class="p-3">
+                    <ul>
+                        <h5 class="text-primary"><b>Aegis는 컴퓨터를 공부하기를 원하는 학생들이 모여 연구 및 학습하는<br>학술동아리입니다</b></h5><br>
+                        <h6 class="text-primary"><b>Aegis는 컴퓨터와 관련된 다양한 활동을 진행합니다</b></h6>
+                        <li>인근 학교 학생들을 대상으로 코딩 수업을 진행하는 봉사활동</li>
+                        <li>Aegis 졸업자들을 초청하여 진행하는 세미나</li>
+                        <li>해킹대회와 코딩대회 또는 해커톤</li>
+                        <li>컴퓨터 기초부터 심화까지 다양한 주제의 소규모 스터디</li>
+                        <li>Kucis(대학정보보호동아리연합회) 가입 및 활동</li>
+                        <li>대외 컨퍼런스 또는 대회 참여</li><br>
+                        <h6 class="text-primary"><b>컴퓨터를 하나도 몰라도 관심과 흥미가 있는 모든 단국대학교 학생들은<br>가입이 가능합니다</b></h6><br>
+                        <h6 class="text-primary"><b>문의</b></h6>                        
+                        <li>동아리방 : 혜당관 530호</li>
+                        <li>인스타그램 : @dku_aegis</li>
+                    </ul>
+                </div><br><br>
+                <div class="py-3 text-center">
+                    <h3 class="text-name"><b>▶ CAGI ◀</b></h3><br>
+                </div>
+                <div id="result_content" class="p-3">
+                    <h6 class="text-primary"><b>창조적이고 진취적인 신기술 문화의 개척을 위한<br>컴퓨터그래픽의 연구를 통한 자아발전과 미래지향적인 사고방식 함양</b></h6>
                 </div><br><br>
             </article>
             <footer>

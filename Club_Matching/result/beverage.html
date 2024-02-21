@@ -7,53 +7,102 @@
     <title>동아리 매칭 TEST</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-        #load_pg{
-            width:100%;
-            height:100%;
-            position:fixed;
-            left:0px;
-            top:0px;
-            background:#fff;
-            text-align: center;
-            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
-        }
-        div#result_content{
-            border: 2px solid #0c6ca4;
-            width: 80%;
-            margin: auto;
-            border-radius: 12px;
-        }
-        .btn.btn-primary {
-            background-color: #0c6ca4 !important;
-            font-size: 30px;
-            padding: 15px 30px;
-            width: 15%;
-        }
         a {
             text-decoration-color: #0c6ca4;
             text-decoration: none;
         }
+        #load_pg{
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#fff;
+            text-align: center;
+            z-index:5000; /* 이 값으로 레이어의 위치를 조정합니다. */
+            animation: changeBackgroundColor 3s infinite; /* 배경색 변화 애니메이션 */
+        }
+        @keyframes changeBackgroundColor {
+        0% { background-color: #fff; } /* 시작 색상 */
+        25% { background-color: #bae6ff; }
+        50% { background-color: #8dd5ff; } /* 중간 색상 */
+        75% { background-color: #62c5ff; }
+        100% { background-color: #46bbff; } /* 최종 색상 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress {
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            border-radius: 10px; /* 둥근 테두리 반경 설정 */
+            height: 30px; /* progress bar의 높이 설정 */
+            overflow: hidden; /* 넘치는 부분 숨기기 */
+        }
+        /* progress bar의 스타일 수정 */
+        .progress-bar {
+            height: 100%;
+            background-color: #0c6ca4; /* 초기 색상 설정 */
+            width: 80%; /* 초기 너비 설정 */
+            transition: width 3.3s ease; /* 너비 변화에 따른 전환 효과 */
+        }
+        div#result_content{
+            border: 0.4vw solid #0c6ca4;
+            width: 90%;
+            margin: auto;
+            border-radius: 1.2vw;
+            font-size: 1.6vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+            padding: 0.5vw; /* 패딩을 화면 너비의 비율로 설정 */
+        }
+        /* text-name 클래스의 스타일 */
+        .text-name {
+            font-size: 3.5vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+        }
+        /* text-primary 클래스의 스타일 */
+        .text-primary {
+            font-size: 2vw; /* 글자 크기를 화면 너비의 비율로 설정 */
+        }
         .btn {
             display:inline-block;
-            margin: 8px;
-            padding: 40px 20px;
+            margin: 1vw;
+            padding: 2vw 3vw;
             background-color: #f5f5f5;
-            border: 1.5px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px !important;
+            border: 0.15vw solid #ccc;
+            border-radius: 1.5vw;
+            font-size: 1.5vw !important;
             font-weight: bold;
-            width: 27%;
+            width: auto;
             text-align:center;
             transition: background-color 0.3s ease; /* 배경색 전환 효과를 부드럽게 적용 */
+        }
+        .btn.btn-primary {
+            background-color: #0c6ca4 !important;
+            font-size: 2.5vw;
+            padding: 2.5% 3.5%;
+            width: auto;
         }
     </style>
     <script>
         setTimeout(function() {
             let loading_page = document.getElementById("load_pg");
             loading_page.style.visibility="hidden";
-        }, 1100);
-        function restart(){
 
+            // 진행 바 색상 및 너비 조절
+            let progressBar = document.getElementById("progress-bar");
+            let width = 0;
+            let interval = setInterval(frame, 100); // 100ms마다 프레임 갱신
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 10;
+                    progressBar.style.width = width + "%";
+                }
+            }
+        }, 3000);
+
+        function restart(){
             location.href="../qtestnew.html"
         }
     </script>
@@ -63,9 +112,9 @@
         <div style="position:absolute; top:25%; left:25%; width: 50%;">
             <h1>Loading...</h1>
         </div>
-        <div class="progress" style="position:absolute; top:50%; left:25%; width: 50%;">
-            <div class="progress-bar progress-bar-striped active" role="progressbar"
-            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar progress-bar-striped active" role="progressbar"
+            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 70%; background-color: #007bff;">
             </div>
         </div>
     </div>
