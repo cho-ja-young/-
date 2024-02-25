@@ -8,10 +8,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <style>
         #progressBar {
-            width: 70%; /* 화면의 80% 정도의 길이를 가지도록 설정합니다. */
+            width: 70%; /* 화면의 70% 정도의 길이를 가지도록 설정 */
             background-color: #ededed;
-            margin: 0 auto; /* 화면의 중앙에 위치하도록 설정합니다. */
-            border-radius: 10px; /* 모든 모서리에 동일한 반지름을 적용합니다. */
+            margin: 0 auto; /* 화면의 중앙에 위치하도록 설정 */
+            border-radius: 10px; /* 모든 모서리에 동일한 반지름을 적용 */
         }
         #progress {
             width: 10%;
@@ -20,7 +20,7 @@
             text-align: center;
             line-height: 30px;
             color: white;
-            border-radius: 10px; /* 모든 모서리에 동일한 반지름을 적용합니다. */
+            border-radius: 10px; /* 모든 모서리에 동일한 반지름을 적용 */
         }
         .btn.btn-primary {
             background-color: #0c6ca4 !important;
@@ -77,9 +77,9 @@
             </div><br><br><br>
         </header>
         <h5 id="title">문제</h5><br><br>
-        <!--1번-->
+
         <input id="clubId" type="hidden" value="beverage">
-        <!--2번-->
+
         <button id="A" type="button" class="btn">대답</button><br>
         <button id="B" type="button" class="btn">대답</button><br>
         <button id="C" type="button" class="btn">대답</button><br>
@@ -87,7 +87,6 @@
         <button id="E" type="button" class="btn">대답</button><br>
         <button id="F" type="button" class="btn">대답</button><br><br><br><br>
     </div>
-        <!--3번-->
         <input type="hidden" id="beverage" value="0">
         <input type="hidden" id="computer" value="0">
         <input type="hidden" id="culture" value="0">
@@ -265,66 +264,64 @@
             }
     
             $("#A").click(function () {
-                // A 버튼을 클릭했을 때 A의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                // A 버튼을 클릭했을 때 A의 "club"에 해당하는 동아리 종류의 값을 1씩 증가
                 var clubs = q[num]["A"]["club"];
                 increaseClubValues(clubs);
                 num++;
-                nextQuestion(); // 다음 질문으로 이동합니다.
+                nextQuestion(); 
             });
 
             $("#B").click(function () {
-                // B 버튼을 클릭했을 때 B의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                // B 버튼을 클릭했을 때 B의 "club"에 해당하는 동아리 종류의 값을 1씩 증가
                 var clubs = q[num]["B"]["club"];
                 increaseClubValues(clubs);
                 num++;
-                nextQuestion(); // 다음 질문으로 이동합니다.
+                nextQuestion(); 
             });
 
             $("#C").click(function () {
-                // C 버튼을 클릭했을 때 C의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                // C 버튼을 클릭했을 때 C의 "club"에 해당하는 동아리 종류의 값을 1씩 증가
                 var clubs = q[num]["C"]["club"];
                 increaseClubValues(clubs);
                 num++;
-                nextQuestion(); // 다음 질문으로 이동합니다.
+                nextQuestion(); 
             });
 
             $("#D").click(function () {
-                // D 버튼을 클릭했을 때 D의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                // D 버튼을 클릭했을 때 D의 "club"에 해당하는 동아리 종류의 값을 1씩 증가
                 var clubs = q[num]["D"]["club"];
                 increaseClubValues(clubs);
                 num++;
-                nextQuestion(); // 다음 질문으로 이동합니다.
+                nextQuestion();
             });
 
             $("#E").click(function () {
-                // E 버튼을 클릭했을 때 E의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                // E 버튼을 클릭했을 때 E의 "club"에 해당하는 동아리 종류의 값을 1씩 증가
                 var clubs = q[num]["E"]["club"];
                 increaseClubValues(clubs);
                 num++;
-                nextQuestion(); // 다음 질문으로 이동합니다.
+                nextQuestion(); 
             });
 
             $("#F").click(function () {
-                // F 버튼을 클릭했을 때 F의 "club"에 해당하는 동아리 종류의 값을 1씩 증가시킵니다.
+                // F 버튼을 클릭했을 때 F의 "club"에 해당하는 동아리 종류의 값을 1씩 증가
                 var clubs = q[num]["F"]["club"];
                 increaseClubValues(clubs);
                 num++;
-                nextQuestion(); // 다음 질문으로 이동합니다.
+                nextQuestion(); 
             });
 
             function increaseClubValues(clubs) {
                 for (var i = 0; i < clubs.length; i++) {
-                    var clubId = clubs[i].toLowerCase(); // 동아리 종류에 따라 ID를 소문자로 변환합니다.
+                    var clubId = clubs[i].toLowerCase(); // 동아리 종류에 따라 ID를 소문자로 변환
                     var currentValue = parseInt($("#" + clubId).val());
-                    $("#" + clubId).val(currentValue + 1); // 해당하는 동아리 종류의 값을 1 증가시킵니다.
+                    $("#" + clubId).val(currentValue + 1); // 해당하는 동아리 종류의 값을 1 증가
                 }
             }
     
             function nextQuestion() {
-                if (num == 11) { //1번
-                    var clubType = ""; //2번
-                    //3번
-                    // 주어진 변수들과 그 값들
+                if (num == 11) { 
+                    var clubType = "";
                     var beverage = $("#beverage").val();
                     var computer = $("#computer").val();
                     var culture = $("#culture").val();
@@ -355,15 +352,12 @@
                     var variables = ['beverage', 'computer', 'culture', 'dance', 'entertainment', 'instrument', 'language', 'marketing', 'pe', 'religion', 'unusual', 'volunteer'];
                     var clubType = variables[maxIndex];
 
-                    window.location.href = "./result/" + clubType + ".html"; //4번
+                    window.location.href = "./result/" + clubType + ".html"; 
 
                 } else {
-                    // $(".q-num").html('Q' + num);
-                    // 여기서는 progress 변수를 증가시켜 나아가는 상황을 가정합니다.
-                    // 실제로는 MBTI 테스트 진행 상황에 따라 로직을 구성해야 합니다.
-                    progress += 10; // 예시로 10%씩 증가시킵니다.
+                    progress += 10;
                     if (progress > 100) {
-                        progress = 100; // 최대 값 설정
+                        progress = 100;
                     }
         
                     document.getElementById("progress").style.width = progress + "%";
@@ -371,7 +365,6 @@
                     console.log("지금 번호 : " + num);
 
                     $("#title").html(q[num]["title"]);
-                    // $("#clubId").val(q[num]["club"]);
                     $("#A").html(q[num]["A"]["content"]);
                     $("#B").html(q[num]["B"]["content"]);
                     if (q[num]["C"]) {
